@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route, Redirect } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <Switch>
+    {/* TRASA STARTOWA: To jest domyślne miejsce, gdzie zaczniemy  */}
+    <Route path="/start">
+      <h1>Witaj, Zespole INSYGNIA ŚMIERCI!</h1>
+      <p>Szkielet projektu gotowy. Zastąpimy ten widok naszym projektem .</p>
+    </Route>
+
+    {/* Przekierowanie głównego URL na trasę startową */}
+    <Route path="/">
+      <Redirect to="/start" />
+    </Route>
+  </Switch>
+);
 
 export default App;

@@ -7,8 +7,20 @@ const tmdbApi = axios.create({
     baseURL: API_URL,
     headers: {
         Authorization: `Bearer ${ACCESS_TOKEN}`,
+        'Content-Type': 'application/json',
     },
-
 });
+
+export const getSearchMovies = async (query) => {
+
+    const response = await tmdbApi.get(`/search/movie?query=${query}`);
+    return response.data.results;
+};
+
+export const getPopularMovies = async () => {
+
+    const response = await tmdbApi.get('/movie/popular');
+    return response.data.results;
+};
 
 export default tmdbApi;

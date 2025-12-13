@@ -1,12 +1,24 @@
-import { all, call, debounce, put } from "redux-saga/effects";
-import { setSearchQuery, setMoviesData, setError, setLoading } from "./globalSlice";
-import tmdbApi from "../Api/tmdbApi";
+import {
+    all,
+    call,
+    debounce,
+    put,
+    takeLatest
+} from "redux-saga/effects";
+import {
+    setSearchQuery,
+    setMoviesData,
+    setError,
+    setLoading,
+    fetchPopularMovies
+} from "./globalSlice";
+import { getSearchMovies, getPopularMovies } from "../Api/tmdbApi";
 
-function* fetchMoviesHandler(action) {
+function* fetchSearchMoviesHandler(action) {
     const query = action.payload;
 
     if (query === "") {
-        yield put(setMoviesData(null));
+        yield put(setMoviesData([]));
         return;
     }
 
@@ -14,29 +26,44 @@ function* fetchMoviesHandler(action) {
         yield put(setLoading(true));
         yield put(setError(false));
 
-        const response = yield call(tmdbApi.get, "search/movie", {
-            params: {
-                query: query,
-                language: "pl-PL",
-                page: 1,
-            },
-        });
+        const movies = yield call(getSearchMovies, query);
 
-        yield put(setMoviesData(response.data.results));
-
+        yield put(setMoviesData(movies));
     } catch (error) {
         yield put(setError(true));
         console.error("Błąd pobierania filmów:", error);
-
     }
 }
 
-function* searchWatcher() {
-    yield debounce(500, setSearchQuery.type, fetchMoviesHandler);
+function* fetchPopularMoviesHandler() {
+    try {
+        yield put(setLoading(true));
+        yield put(setError(false));
+
+        const movies = yield call(getPopularMovies);
+
+        yield put(setMoviesData(movies));
+
+    } catch (error) {
+        yield put(setError(true));
+        console.error("Błąd podczas pobierania popularnych filmów:", error);
+    }
 }
+
+
+function* searchWatcher() {
+    yield debounce(500, setSearchQuery.type, fetchSearchMoviesHandler);
+}
+
+function* popularMoviesWatcher() {
+    yield takeLatest(fetchPopularMovies.type, fetchPopularMoviesHandler);
+}
+
+
 
 export function* globalSaga() {
     yield all([
         call(searchWatcher),
+        call(popularMoviesWatcher),
     ]);
 }

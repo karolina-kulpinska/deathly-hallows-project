@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/deathly-hallows-project/static/js/main.92e1f2c9.js",
+    "main.js": "/deathly-hallows-project/static/js/main.eda31d53.js",
     "index.html": "/deathly-hallows-project/index.html",
-    "main.92e1f2c9.js.map": "/deathly-hallows-project/static/js/main.92e1f2c9.js.map"
+    "main.eda31d53.js.map": "/deathly-hallows-project/static/js/main.eda31d53.js.map"
   },
   "entrypoints": [
-    "static/js/main.92e1f2c9.js"
+    "static/js/main.eda31d53.js"
   ]
 }

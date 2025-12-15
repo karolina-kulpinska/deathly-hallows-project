@@ -1,23 +1,17 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Switch, Route, Redirect } from "react-router-dom";
-import { fetchPopularMovies } from './Features/globalSlice';
-import MovieList from './Features/MovieList';
-
-const StartPage = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchPopularMovies());
-  }, [dispatch]);
-
-  return <MovieList />;
-};
 
 const App = () => (
   <Switch>
-    <Route exact path="/" component={StartPage} />
-    <Route path="/movies" component={MovieList} />
-    <Redirect to="/" />
+    {/* TRASA STARTOWA: To jest domyślne miejsce, gdzie zaczniemy  */}
+    <Route path="/start">
+      <h1>Witaj, Zespole INSYGNIA ŚMIERCI!</h1>
+      <p>Szkielet projektu gotowy. Zastąpimy ten widok naszym projektem .</p>
+    </Route>
+
+    {/* Przekierowanie głównego URL na trasę startową */}
+    <Route path="/">
+      <Redirect to="/start" />
+    </Route>
   </Switch>
 );
 

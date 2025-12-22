@@ -6,6 +6,8 @@ Welcome to the **Movie Search Engine** project repository! Our team is actively 
 
 Our functional demo site will be available here as soon as the main UI components are complete. **We are currently in the process of implementing the visible front-end components.**
 
+![Project Image](public/Screenshot.png)
+
 [**Live Demo Version**]( https://karolina-kulpinska.github.io/deathly-hallows-project/)
 
 ---

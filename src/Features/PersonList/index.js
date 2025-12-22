@@ -9,9 +9,10 @@ import {
 } from "../peopleSlice";
 import { StyledHeader, Container } from "./styled";
 import { PeopleListCard } from "./PeopleListCard/index";
-import { StyledSpinner, SpinnerWrapper } from "../../../common/Loading/styled";
-import { Error } from "../../../common/Error/index";
-import { NoResults } from "../../../common/NoResults/index";
+// Poprawione importy z końcówką "View" zgodnie z Twoją strukturą plików:
+import { StyledSpinner, SpinnerWrapper } from "../../../common/LoadingView/styled";
+import { Error } from "../../../common/ErrorView/index";
+import { NoResults } from "../../../common/NoResultsView/index";
 import { Pagination } from "../../../common/Pagination";
 
 export const PeopleList = () => {

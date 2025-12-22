@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { ReactComponent as Danger } from "./Danger.svg";
 
-export const ErrorContainer = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,17 +13,39 @@ export const ErrorContainer = styled.div`
   }
 `;
 
-export const ErrorHeader = styled.h2`
+export const DangerIcon = styled(Danger)`
+  margin-bottom: 38px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    margin-bottom: 20px;
+    width: 100px;
+  }
+`;
+
+export const Header = styled.h2`
   font-size: 36px;
   font-weight: 600;
   color: ${({ theme }) => theme.color.woodsmoke};
+  margin: 0;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 20px;
   }
 `;
 
-export const StyledButton = styled.button`
+export const Info = styled.p`
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 24px 0;
+  color: ${({ theme }) => theme.color.woodsmoke};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 16px;
+  }
+`;
+
+export const HomepageButton = styled.button`
   padding: 16px 24px;
   border-radius: 5px;
   border: none;
@@ -32,11 +55,9 @@ export const StyledButton = styled.button`
   cursor: pointer;
   transition: 0.3s;
   
-  /* Poprawka: kolor tła z theme.js */
   background-color: ${({ theme }) => theme.color.scienceBlue};
   color: ${({ theme }) => theme.color.white};
 
-  /* Poprawka: kolor hover z theme.js */
   &:hover {
     background-color: ${({ theme }) => theme.color.dodgerBlue};
   }

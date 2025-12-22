@@ -1,78 +1,47 @@
 import styled from "styled-components";
-import {ReactComponent as Danger} from "./Danger.svg"
 
+export const ErrorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 180px;
 
-export const Container = styled.div`
-    display: grid;
-    max-width: 1368px;
-    grid-template-columns: 1fr;
-    grid-gap: 24px;
-    justify-items: center;
-    margin: 180px auto;
-    
-    @media (max-width: 767px) {
-        margin-top: 90px
-    }
-`
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    margin-top: 100px;
+  }
+`;
 
-export const DangerIcon = styled(Danger)`
-    width: 120px;
-    height: 120px;
+export const ErrorHeader = styled.h2`
+  font-size: 36px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.color.woodsmoke};
 
-    @media (max-width: 767px) {
-        width: 80px;
-        height: 80px;
-    }
-`
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 20px;
+  }
+`;
 
-export const Header = styled.h1`
-    font-size: 36px;
-    font-weight: 600;
-    line-height: 120%;
-    text-align: center;
-    margin: 0px;
+export const StyledButton = styled.button`
+  padding: 16px 24px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 19px;
+  cursor: pointer;
+  transition: 0.3s;
+  
+  /* Poprawka: kolor tła z theme.js */
+  background-color: ${({ theme }) => theme.color.scienceBlue};
+  color: ${({ theme }) => theme.color.white};
 
-    @media (max-width: 767px) {
-        font-size: 14px;
-        font-weight: 500;
-    }
-`
+  /* Poprawka: kolor hover z theme.js */
+  &:hover {
+    background-color: ${({ theme }) => theme.color.dodgerBlue};
+  }
 
-export const Info = styled.p`
-    font-size: 22px;
-    font-weight: 500;
-    line-height: 130%;
-    text-align: center;
-    margin: 0px;
-
-    @media (max-width: 767px) {
-        font-size: 10px;
-        font-weight: 400;
-    }
-`
-
-export const HomepageButton = styled.button`
-    padding: 16px 24px;
-    height: auto;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 19px;
-    background-color: #0044cc;
-    color: #fff;
-    border: 0px;
-    border-radius: 5px;
-
-    &:hover {
-        background-color: hsla(220, 100%, 50%, 1.00);
-    }
-
-    &:active {
-        background-color: hsla(220, 100%, 60%, 1.00);
-    }
-
-    @media (max-width: 767px) {
-        font-size: 10px;
-        font-weight: 400;
-        padding: 8px 12px;
-    }
-`
+  &:active {
+    filter: brightness(110%);
+  }
+`;

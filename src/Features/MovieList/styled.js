@@ -1,3 +1,4 @@
+//stylw skopiowałam z PersonList/styled.js - trzeba dokonac popawek 
 import styled from "styled-components";
 
 export const Container = styled.main`

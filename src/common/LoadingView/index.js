@@ -1,8 +1,8 @@
 import { Container, Header, Spinner } from "./styled";
 
-const LoadingView = ({header}) => (
+const LoadingView = () => (
     <Container>
-        <Header>{header}</Header>
+        <Header>Search results for "Popular People"</Header>
         <Spinner></Spinner>
     </Container>
 );

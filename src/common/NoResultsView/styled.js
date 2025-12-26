@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {ReactComponent as Image} from "./Picture.svg"
+import { ReactComponent as Image } from "./Picture.svg"
 
 
 export const Container = styled.div`
@@ -9,7 +9,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
 
-    @media (max-width: 768px) {
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
         margin-top: 24px;
         padding: 0px 16px;
     }
@@ -20,20 +20,23 @@ export const Header = styled.h1`
     font-weight: 600;
     line-height: 120%;
     margin: 0;
+    color: ${({ theme }) => theme.color.woodsmoke};
 
-    @media (max-width: 768px) {
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
         font-size: 14px;
         font-weight: 500;
     }
 `
 
 export const NoResultsImage = styled(Image)`
+    width: 100%;
     max-width: 668px;
     height: auto;
     align-self: center;
     margin-top: 40px;
 
-    @media (max-width: 768px) {
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
         max-width: 400px;
         margin-top: 20px;
     }

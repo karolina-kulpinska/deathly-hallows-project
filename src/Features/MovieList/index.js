@@ -1,46 +1,49 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { globalSelectors } from '../globalSlice';
+import { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from "react-router-dom";
+import { globalSelectors, fetchPopularMovies } from '../globalSlice';
+import { Container, StyledHeader } from "./styled";
+import MovieTile from "../../common/MovieTitle";
+import LoadingView from "../../common/LoadingView";
+import ErrorView from "../../common/ErrorView";
 
-const MovieList = () => {
+export const MovieList = () => {
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const query = new URLSearchParams(location.search).get("search");
+
     const movies = useSelector(globalSelectors.selectMoviesData);
     const isLoading = useSelector(globalSelectors.selectIsLoading);
     const isError = useSelector(globalSelectors.selectIsError);
 
-    if (isError) {
-        return <p className="error-message">Wystąpił błąd podczas ładowania danych. Sprawdź konsolę i połączenie z internetem.</p>;
-    }
+    useEffect(() => {
+        if (!query) {
+            dispatch(fetchPopularMovies());
+        }
+    }, [dispatch, query]);
 
-    if (isLoading && movies.length === 0) {
-        return <p className="loading-message">Ładowanie najpopularniejszych filmów...</p>;
-    }
-
-    if (movies.length === 0) {
-        return <p className="no-results-message">Brak filmów do wyświetlenia. Zacznij szukać!</p>;
-    }
+    if (isError) return <ErrorView />;
+    if (isLoading) return <LoadingView />;
 
     return (
-        <div className="movie-list-grid">
-            <h2>{movies.length > 20 ? 'Popularne Filmy' : 'Wyniki Wyszukiwania'}</h2>
-
-            {movies.map(movie => (
-                //Karta filmu (zgodnie z projektem z Figmy)
-                <div key={movie.id} className="movie-card">
-                    {/* W Figmie masz dokładne wymiary dla plakatu, użyj ich ! */}
-                    {movie.poster_path && (
-                        <img
-                            // Używamy standardowej ścieżki TMDB dla plakatów
-                            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                            alt={movie.title}
-                            className="movie-poster"
-                        />
-                    )}
-                    <h3 className="movie-title">{movie.title}</h3>
-                    <p className="movie-year">Rok: {movie.release_date ? movie.release_date.substring(0, 4) : 'Brak'}</p>
-                </div>
+        <Container>
+            <StyledHeader>
+                {query ? `Search results for "${query}"` : "Popular movies"}
+            </StyledHeader>
+            {movies && movies.map((movie) => (
+                <MovieTile
+                    key={movie.id}
+                    title={movie.title}
+                    poster={
+                        movie.poster_path
+                            ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
+                            : null
+                    }
+                    year={movie.release_date ? movie.release_date.split("-")[0] : ""}
+                    rate={movie.vote_average}
+                    votes={movie.vote_count}
+                />
             ))}
-        </div>
+        </Container>
     );
 };
-
-export default MovieList;

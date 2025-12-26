@@ -5,8 +5,9 @@ const ErrorView = () => {
         <Container>
             <DangerIcon />
             <Header>Ooops! Something went wrong...</Header>
-            <Info>Please check your network connection<br/>and try again</Info>
-            <HomepageButton>Back to home page</HomepageButton>
+            <Info>Please check your network connection<br />and try again</Info>
+            <HomepageButton onClick={() => window.location.assign("/")}>
+                Back to home page</HomepageButton>
         </Container>
     );
 };

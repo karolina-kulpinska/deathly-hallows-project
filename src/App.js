@@ -1,30 +1,23 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { fetchPopularMovies } from "./Features/globalSlice";
-import MovieList from "./Features/MovieList";
+import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
+import { MovieList } from "./Features/MovieList";
+import { PersonList } from "./Features/PersonList";
 import Navigation from "./Features/Navigation";
-
-const StartPage = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchPopularMovies());
-  }, [dispatch]);
-
-  return <MovieList />;
-};
-
 const App = () => (
-  <>
+  <HashRouter>
     <Navigation />
 
     <Switch>
-      <Route exact path="/" component={StartPage} />
-      <Route path="/movies" component={MovieList} />
-      <Redirect to="/" />
+      <Route path="/people">
+        <PersonList />
+      </Route>
+      <Route path="/movies">
+        <MovieList />
+      </Route>
+      <Route exact path="/">
+        <Redirect to="/movies" />
+      </Route>
     </Switch>
-  </>
+  </HashRouter>
 );
 
 export default App;

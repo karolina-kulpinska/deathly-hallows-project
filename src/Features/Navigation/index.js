@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { setSearchQuery } from "../globalSlice";
 import Logo from "./Logo";
 import {
@@ -12,6 +13,9 @@ import {
 
 const Navigation = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  const isPeoplePage = location.pathname.includes("/people") || location.hash.includes("/people");
 
   const onSearchChange = (event) => {
     dispatch(setSearchQuery(event.target.value));
@@ -35,7 +39,7 @@ const Navigation = () => {
         </Menu>
 
         <SearchInput
-          placeholder="Search for movies..."
+          placeholder={isPeoplePage ? "Search for people..." : "Search for movies..."}
           onChange={onSearchChange}
         />
       </Content>

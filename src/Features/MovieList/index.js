@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from "react-router-dom";
-import { globalSelectors, fetchPopularMovies } from '../globalSlice';
+import { globalSelectors, fetchPopularMovies, setSearchQuery } from '../globalSlice';
 import { Container, StyledHeader } from "./styled";
 import MovieTile from "../../common/MovieTitle";
 import LoadingView from "../../common/LoadingView";
@@ -10,7 +10,7 @@ import ErrorView from "../../common/ErrorView";
 export const MovieList = () => {
     const dispatch = useDispatch();
     const location = useLocation();
-    const query = new URLSearchParams(location.search).get("search");
+    const query = new URLSearchParams(location.hash.split("?")[1]).get("search");
 
     const movies = useSelector(globalSelectors.selectMoviesData);
     const isLoading = useSelector(globalSelectors.selectIsLoading);
@@ -19,11 +19,13 @@ export const MovieList = () => {
     useEffect(() => {
         if (!query) {
             dispatch(fetchPopularMovies());
+        } else {
+            dispatch(setSearchQuery(query));
         }
     }, [dispatch, query]);
 
     if (isError) return <ErrorView />;
-    if (isLoading) return <LoadingView />;
+    if (isLoading) return <LoadingView query={query} />;
 
     return (
         <Container>
@@ -33,7 +35,7 @@ export const MovieList = () => {
             {movies && movies.map((movie) => (
                 <MovieTile
                     key={movie.id}
-                    title={movie.title}
+                    name={movie.title}
                     poster={
                         movie.poster_path
                             ? `https://image.tmdb.org/t/p/w342${movie.poster_path}`

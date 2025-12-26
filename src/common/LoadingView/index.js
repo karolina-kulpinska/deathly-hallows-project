@@ -1,8 +1,8 @@
 import { Container, Header, Spinner } from "./styled";
 
-const LoadingView = () => (
+const LoadingView = ({ query }) => (
     <Container>
-        <Header>Search results for "Popular People"</Header>
+        <Header>{query ? `Search results for "${query}"` : "Loading..."}</Header>
         <Spinner></Spinner>
     </Container>
 );

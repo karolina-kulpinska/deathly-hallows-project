@@ -6,6 +6,7 @@ import { Container, StyledHeader } from "./styled";
 import PersonTitle from "../../common/PersonTitle";
 import LoadingView from "../../common/LoadingView";
 import ErrorView from "../../common/ErrorView";
+import Pagination from "../../common/Pagination";
 
 export const PersonList = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export const PersonList = () => {
   const people = useSelector(globalSelectors.selectPeopleData);
   const isLoading = useSelector(globalSelectors.selectIsLoading);
   const isError = useSelector(globalSelectors.selectIsError);
+  const page = useSelector(globalSelectors.selectPage);
 
   useEffect(() => {
     if (!query) {
@@ -21,7 +23,7 @@ export const PersonList = () => {
     } else {
       dispatch(setSearchQuery(query));
     }
-  }, [dispatch, query]);
+  }, [dispatch, query, page]);
 
 
   if (isError) return <ErrorView />;
@@ -41,6 +43,7 @@ export const PersonList = () => {
             : null}
         />
       ))}
+      <Pagination />
     </Container>
   );
 };

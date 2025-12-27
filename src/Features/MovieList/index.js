@@ -6,6 +6,7 @@ import { Container, StyledHeader } from "./styled";
 import MovieTitle from "../../common/MovieTitle";
 import LoadingView from "../../common/LoadingView";
 import ErrorView from "../../common/ErrorView";
+import Pagination from "../../common/Pagination";
 
 export const MovieList = () => {
     const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export const MovieList = () => {
     const movies = useSelector(globalSelectors.selectMoviesData);
     const isLoading = useSelector(globalSelectors.selectIsLoading);
     const isError = useSelector(globalSelectors.selectIsError);
+    const page = useSelector(globalSelectors.selectPage);
 
     useEffect(() => {
         if (!query) {
@@ -22,7 +24,7 @@ export const MovieList = () => {
         } else {
             dispatch(setSearchQuery(query));
         }
-    }, [dispatch, query]);
+    }, [dispatch, query, page]);
 
     if (isError) return <ErrorView />;
     if (isLoading) return <LoadingView query={query} />;
@@ -46,6 +48,7 @@ export const MovieList = () => {
                     votes={movie.vote_count}
                 />
             ))}
+            <Pagination />
         </Container>
     );
 };

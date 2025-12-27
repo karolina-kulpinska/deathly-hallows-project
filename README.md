@@ -1,35 +1,50 @@
 # 🚧 UNDER CONSTRUCTION: Movie Search Engine Prototype
 
-Welcome to the **Movie Search Engine** project repository! Our team is actively developing a fast and robust front-end application designed for searching The Movie Database (TMDB). This README tracks our progress and key implemented features.
+Welcome to the **Movie Search Engine** project! Our team is actively developing a high-performance, responsive web application for exploring The Movie Database (TMDB).
 
-### 🔗 Live Demo Site (Coming Soon)
-
-Our functional demo site will be available here as soon as the main UI components are complete. **We are currently in the process of implementing the visible front-end components.**
-
-![Project Image](public/Screenshot.png)
-
-[**Live Demo Version**]( https://karolina-kulpinska.github.io/deathly-hallows-project/)
+### 🔗 Live Demo Site
+The interface is being updated in real-time. You can track our progress here:
+[**VIEW LIVE DEMO**](https://karolina-kulpinska.github.io/deathly-hallows-project/)
 
 ---
 
-## 🏗️ Progress and Key Achievements
+## 🖼️ Interface Preview
 
-In the initial phase, we focused exclusively on building the **high-performance logic** and **state management foundation**—the "engine" that powers the search functionality.
+<p align="center">
+  <img src="public/image/movies.png" width="32%" alt="Movies Desktop View" />
+  <img src="public/image/people.png" width="32%" alt="People Desktop View" />
+  <img src="public/image/pagination.png" width="32%" alt="Mobile View" />
+</p>
 
-### 1. 🧠 Search Optimization and Logic Control
+## 🏗️ Project Progress & Current Statu
 
-* **Intelligent Throttling (Debouncing):** We implemented a **500ms Debounce delay** to ensure that the API is called only after the user stops typing. This significantly reduces server load and unnecessary API costs.
-* **State Control:** We utilize **Redux Toolkit** for predictable state management and **Redux-Saga** for handling complex asynchronous flows (loading, error states, and API calls).
+We are currently focusing on building a rock-solid logic engine and a seamless user experience.
 
-### 2. ✅ Stable TMDB API Connection
+### 1. 🧠 Core Logic & Optimization (Completed)
+* **Intelligent Debouncing:** API calls are delayed by 500ms to reduce server load and improve user experience while typing.
+* **State Management:** Powered by **Redux Toolkit** for predictable state and **Redux-Saga** for handling complex asynchronous flows.
+* **Secure API Connection:** Stable integration with TMDB using Access Token V4 via Authorization headers.
 
-* **Authorization Fix:** We successfully refactored the code to use the secure **Access Token V4** via the `Authorization: Bearer` header, resolving previous 401 (Unauthorized) errors.
-* **Verification:** The connection is stable and has been **verified** using Redux DevTools: upon dispatching a search query, movie data successfully fetches and populates the Redux store.
+### 2. 📑 Advanced Pagination System (Completed)
+* Full navigation support: **First, Previous, Next, and Last** page buttons.
+* **Safety Guard:** Implemented logic to cap results at 500 pages, preventing technical errors from the TMDB API.
+* **Mobile Responsiveness:** Pagination labels automatically hide on small screens, displaying only intuitive SVG icons.
+* **Grid Alignment:** Centered layout using `grid-column: 1 / -1` for a clean look.
 
-### 3. 🔜 Next Steps
+### 3. 👥 Movie & People Modules (In Progress)
+* Dynamic lists for Popular Movies and Popular People.
+* Comprehensive Loading and Error states (handling 404s and API downtime).
+* Context-aware search engine that switches logic based on the active tab.
 
-With the search logic finalized and proven to work, our current focus shifts to the **User Interface (UI)** implementation:
+---
 
-* **Search Component:** Building the visible input field and connecting it to the underlying Redux logic.
-* **Results View:** Displaying the fetched movie list to the user.
+## 🔜 Next Steps
+- [ ] Development of detailed Single Movie and Single Person pages.
+- [ ] Final polishing of UI tiles and hover effects.
+- [ ] Performance optimization and accessibility (a11y) audit.
 
+## 🛠️ Tech Stack
+* **React 18** (Hooks, Router)
+* **Redux Toolkit & Redux-Saga**
+* **Styled-Components** (ThemeProvider)
+* **Axios** (API communication)

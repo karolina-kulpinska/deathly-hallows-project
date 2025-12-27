@@ -3,7 +3,8 @@ import {
     call,
     debounce,
     put,
-    takeLatest
+    takeLatest,
+    select
 } from "redux-saga/effects";
 import {
     setSearchQuery,
@@ -12,7 +13,9 @@ import {
     setLoading,
     fetchPopularMovies,
     fetchPopularPeople,
-    setPeopleData
+    setPeopleData,
+    setTotalPages,
+    globalSelectors
 } from "./globalSlice";
 import { getSearchMovies, getPopularMovies, getPopularPeople, getSearchPeople } from "../Api/tmdbApi";
 
@@ -35,34 +38,41 @@ function* fetchSearchHandler(action) {
         yield put(setError(false));
 
         const isPeoplePage = window.location.hash.includes("/people");
+        const page = yield select(globalSelectors.selectPage);
 
         const data = isPeoplePage
-            ? yield call(getSearchPeople, query)
-            : yield call(getSearchMovies, query);
+            ? yield call(getSearchPeople, query, page)
+            : yield call(getSearchMovies, query, page);
+
+        const totalPages = data.total_pages > 500 ? 500 : data.total_pages;
 
         if (isPeoplePage) {
-            yield put(setPeopleData(data));
+            yield put(setPeopleData(data.results));
+            yield put(setTotalPages(totalPages));
         } else {
-            yield put(setMoviesData(data));
+            yield put(setMoviesData(data.results));
+            yield put(setTotalPages(totalPages));
         }
     } catch (error) {
         yield put(setError(true));
-        console.error("Błąd wyszukiwania:", error);
     }
 }
 
 function* fetchPopularMoviesHandler() {
     try {
         yield put(setLoading(true));
+        const page = yield select(globalSelectors.selectPage);
+        const data = yield call(getPopularMovies, page);
         yield put(setError(false));
+        const totalPages = data.total_pages > 500 ? 500 : data.total_pages;
 
-        const movies = yield call(getPopularMovies);
 
-        yield put(setMoviesData(movies));
+
+        yield put(setMoviesData(data.results));
+        yield put(setTotalPages(totalPages));
 
     } catch (error) {
         yield put(setError(true));
-        console.error("Błąd podczas pobierania popularnych filmów:", error);
     }
 }
 
@@ -79,8 +89,15 @@ function* fetchPopularPeopleHandler() {
     try {
         yield put(setLoading(true));
         yield put(setError(false));
-        const people = yield call(getPopularPeople);
-        yield put(setPeopleData(people));
+
+        const page = yield select(globalSelectors.selectPage);
+        const data = yield call(getPopularPeople, page);
+        const totalPages = data.total_pages > 500 ? 500 : data.total_pages;
+
+        yield put(setPeopleData(data.results));
+        yield put(setTotalPages(totalPages));
+
+
     } catch (error) {
         yield put(setError(true));
         console.error("Błąd podczas pobierania listy popularnych osób:", error);

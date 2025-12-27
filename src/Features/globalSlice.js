@@ -1,19 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-    searchQuery: "",
-    moviesData: [],
-    peopleData: [],
-    isLoading: false,
-    isError: false,
-};
-
 const globalSlice = createSlice({
     name: 'global',
-    initialState,
+    initialState: {
+        searchQuery: "",
+        moviesData: [],
+        peopleData: [],
+        isLoading: false,
+        isError: false,
+        page: 1,
+        totalPages: 500,
+    },
     reducers: {
         setSearchQuery: (state, { payload }) => {
             state.searchQuery = payload;
+            state.page = 1;
         },
 
         fetchPopularMovies: (state) => {
@@ -40,8 +41,15 @@ const globalSlice = createSlice({
         setError: (state, { payload }) => {
             state.isError = payload;
             state.isLoading = false;
-        }
+        },
+        setPage: (state, { payload }) => {
+            state.page = payload;
+        },
+        setTotalPages: (state, { payload }) => {
+            state.totalPages = payload;
+        },
     },
+
 });
 
 export const globalSelectors = {
@@ -50,6 +58,8 @@ export const globalSelectors = {
     selectIsLoading: state => state.global.isLoading,
     selectIsError: state => state.global.isError,
     selectSearchQuery: state => state.global.searchQuery,
+    selectPage: state => state.global.page,
+    selectTotalPages: state => state.global.totalPages,
 };
 export const {
     setSearchQuery,
@@ -58,7 +68,9 @@ export const {
     setLoading,
     setError,
     fetchPopularMovies,
-    fetchPopularPeople
+    fetchPopularPeople,
+    setPage,
+    setTotalPages
 } = globalSlice.actions;
 
 export const globalReducer = globalSlice.reducer;

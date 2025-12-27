@@ -1,8 +1,15 @@
-import { Wrapper, Image, Name } from "./styled";
+import { Wrapper, Image, Name, PosterWrapper } from "./styled";
+import PersonPlaceholder from "./Placeholder";
 
 const PersonTitle = ({ name, poster }) => (
     <Wrapper>
-        <Image src={poster} alt={name} />
+        <PosterWrapper>
+        {poster ? (
+      <Image src={poster} alt={name} />
+    ) : (
+      <PersonPlaceholder />
+    )}
+    </PosterWrapper>
         <Name>{name}</Name>
     </Wrapper>
 );

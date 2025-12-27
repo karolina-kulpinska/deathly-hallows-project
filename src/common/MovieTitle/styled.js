@@ -34,3 +34,20 @@ export const Name = styled.h2`
   margin: 0;
   color: ${({ theme }) => theme.color.woodsmoke};
 `;
+
+export const PosterWrapper = styled.div`
+  width: 100%;
+  aspect-ratio: 114 / 169;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #c4c4c4;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`;

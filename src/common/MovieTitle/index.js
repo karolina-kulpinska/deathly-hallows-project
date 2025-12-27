@@ -1,10 +1,17 @@
-import { Wrapper, Image, Name } from "./styled";
+import { Wrapper, Image, Name, PosterWrapper } from "./styled";
+import MoviePlaceholder from "./Placeholder";
 
-const MovieTile = ({ name, poster }) => (
+const MovieTitle = ({ name, poster }) => (
     <Wrapper>
-        <Image src={poster} alt={name} />
+        <PosterWrapper>
+        {poster ? (
+      <Image src={poster} alt={name} />
+    ) : (
+      <MoviePlaceholder />
+    )}
+    </PosterWrapper>
         <Name>{name}</Name>
     </Wrapper>
 );
 
-export default MovieTile;
+export default MovieTitle;

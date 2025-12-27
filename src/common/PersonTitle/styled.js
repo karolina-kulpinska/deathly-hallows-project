@@ -19,13 +19,6 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Image = styled.img`
-  width: 176px;
-  height: 231px; 
-  object-fit: cover; 
-  border-radius: 5px;
-`;
-
 export const Name = styled.h2`
   font-weight: 500;
   font-size: 22px;
@@ -33,4 +26,28 @@ export const Name = styled.h2`
   text-align: center;
   margin: 0;
   color: ${({ theme }) => theme.color.woodsmoke};
+`;
+
+export const PosterWrapper = styled.div`
+  width: 100%;
+  aspect-ratio: 176 / 231;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #c4c4c4;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
 `;

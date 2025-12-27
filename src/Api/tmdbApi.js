@@ -11,26 +11,26 @@ const tmdbApi = axios.create({
     },
 });
 
-export const getSearchMovies = async (query) => {
+export const getSearchMovies = async (query, page) => {
 
-    const response = await tmdbApi.get(`/search/movie?query=${query}`);
-    return response.data.results;
+    const response = await tmdbApi.get(`/search/movie?query=${query}&page=${page}`);
+    return response.data;
 };
 
-export const getPopularMovies = async () => {
+export const getPopularMovies = async (page) => {
 
-    const response = await tmdbApi.get('/movie/popular');
-    return response.data.results;
+    const response = await tmdbApi.get(`/movie/popular?page=${page}`);
+    return response.data;
 };
 
-export const getPopularPeople = async () => {
-    const response = await tmdbApi.get('/person/popular');
-    return response.data.results;
+export const getPopularPeople = async (page) => {
+    const response = await tmdbApi.get(`/person/popular?page=${page}`);
+    return response.data;
 };
 
-export const getSearchPeople = async (query) => {
-    const response = await tmdbApi.get(`/search/person?query=${query}`);
-    return response.data.results;
+export const getSearchPeople = async (query, page) => {
+    const response = await tmdbApi.get(`/search/person?query=${query}&page=${page}`);
+    return response.data;
 };
 
 export default tmdbApi;

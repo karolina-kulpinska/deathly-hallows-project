@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from "react-router-dom";
 import { globalSelectors, fetchPopularMovies, setSearchQuery } from '../globalSlice';
 import { Container, StyledHeader } from "./styled";
-import MovieTile from "../../common/MovieTitle";
+import MovieTitle from "../../common/MovieTitle";
 import LoadingView from "../../common/LoadingView";
 import ErrorView from "../../common/ErrorView";
 
@@ -33,7 +33,7 @@ export const MovieList = () => {
                 {query ? `Search results for "${query}"` : "Popular movies"}
             </StyledHeader>
             {movies && movies.map((movie) => (
-                <MovieTile
+                <MovieTitle
                     key={movie.id}
                     name={movie.title}
                     poster={

@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 import { setSearchQuery } from "../globalSlice";
 import Logo from "./Logo";
 import {
@@ -15,6 +15,17 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
+  const isHomePage = location.pathname === "/";
+
+  const onMoviesClick = () => {
+  if (isHomePage) {
+    dispatch(setSearchQuery(""));
+  }
+};
+
+  const searchQuery = useSelector(
+  (state) => state.global.searchQuery);
+
   const isPeoplePage = location.pathname.includes("/people") || location.hash.includes("/people");
 
   const onSearchChange = (event) => {
@@ -24,21 +35,30 @@ const Navigation = () => {
   return (
     <Wrapper>
       <Content>
-        <LogoWrapper>
+        <LogoWrapper as={Link} to ="/">
           <Logo />
           <span>Movies Browser</span>
         </LogoWrapper>
 
         <Menu>
-          <MenuLink exact to="/">
+          <MenuLink
+            exact
+            to="/"
+            activeClassName="active"
+            onClick={onMoviesClick}
+          >
             MOVIES
           </MenuLink>
-          <MenuLink to="/people">
+          <MenuLink 
+            to="/people" 
+            activeClassName="active"
+          >
             PEOPLE
           </MenuLink>
         </Menu>
 
         <SearchInput
+          value={searchQuery}
           placeholder={isPeoplePage ? "Search for people..." : "Search for movies..."}
           onChange={onSearchChange}
         />

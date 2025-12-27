@@ -21,6 +21,7 @@ export const LogoWrapper = styled.div`
   color: white;
   font-weight: bold;
   font-size: 20px;
+  text-decoration: none;
 
   svg {
     display: block;

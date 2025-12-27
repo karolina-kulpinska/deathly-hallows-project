@@ -23,4 +23,14 @@ export const getPopularMovies = async () => {
     return response.data.results;
 };
 
+export const getPopularPeople = async () => {
+    const response = await tmdbApi.get('/person/popular');
+    return response.data.results;
+};
+
+export const getSearchPeople = async (query) => {
+    const response = await tmdbApi.get(`/search/person?query=${query}`);
+    return response.data.results;
+};
+
 export default tmdbApi;

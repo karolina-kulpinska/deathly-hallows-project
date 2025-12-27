@@ -10,15 +10,23 @@ import {
     setMoviesData,
     setError,
     setLoading,
-    fetchPopularMovies
+    fetchPopularMovies,
+    fetchPopularPeople,
+    setPeopleData
 } from "./globalSlice";
-import { getSearchMovies, getPopularMovies } from "../Api/tmdbApi";
+import { getSearchMovies, getPopularMovies, getPopularPeople, getSearchPeople } from "../Api/tmdbApi";
 
-function* fetchSearchMoviesHandler(action) {
+function* fetchSearchHandler(action) {
     const query = action.payload;
 
     if (query === "") {
-        yield put(setMoviesData([]));
+        const isPeoplePage = window.location.hash.includes("/people");
+
+        if (isPeoplePage) {
+            yield put(fetchPopularPeople());
+        } else {
+            yield put(fetchPopularMovies());
+        }
         return;
     }
 
@@ -26,12 +34,20 @@ function* fetchSearchMoviesHandler(action) {
         yield put(setLoading(true));
         yield put(setError(false));
 
-        const movies = yield call(getSearchMovies, query);
+        const isPeoplePage = window.location.hash.includes("/people");
 
-        yield put(setMoviesData(movies));
+        const data = isPeoplePage
+            ? yield call(getSearchPeople, query)
+            : yield call(getSearchMovies, query);
+
+        if (isPeoplePage) {
+            yield put(setPeopleData(data));
+        } else {
+            yield put(setMoviesData(data));
+        }
     } catch (error) {
         yield put(setError(true));
-        console.error("Błąd pobierania filmów:", error);
+        console.error("Błąd wyszukiwania:", error);
     }
 }
 
@@ -52,11 +68,27 @@ function* fetchPopularMoviesHandler() {
 
 
 function* searchWatcher() {
-    yield debounce(500, setSearchQuery.type, fetchSearchMoviesHandler);
+    yield debounce(500, setSearchQuery.type, fetchSearchHandler);
 }
 
 function* popularMoviesWatcher() {
     yield takeLatest(fetchPopularMovies.type, fetchPopularMoviesHandler);
+}
+
+function* fetchPopularPeopleHandler() {
+    try {
+        yield put(setLoading(true));
+        yield put(setError(false));
+        const people = yield call(getPopularPeople);
+        yield put(setPeopleData(people));
+    } catch (error) {
+        yield put(setError(true));
+        console.error("Błąd podczas pobierania listy popularnych osób:", error);
+    }
+}
+
+function* popularPeopleWatcher() {
+    yield takeLatest(fetchPopularPeople.type, fetchPopularPeopleHandler);
 }
 
 
@@ -65,5 +97,6 @@ export function* globalSaga() {
     yield all([
         call(searchWatcher),
         call(popularMoviesWatcher),
+        call(popularPeopleWatcher),
     ]);
 }

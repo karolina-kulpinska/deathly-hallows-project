@@ -1,91 +1,46 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import {
-  fetchPopularPeople,
-  fetchSearchPeople,
-  selectTotalResults,
-  selectTotalPages,
-} from "../peopleSlice";
-import { StyledHeader, Container } from "./styled";
-import { PeopleListCard } from "./PeopleListCard/index";
-// Poprawione importy z końcówką "View" zgodnie z Twoją strukturą plików:
-import { StyledSpinner, SpinnerWrapper } from "../../../common/LoadingView/styled";
-import { Error } from "../../../common/ErrorView/index";
-import { NoResults } from "../../../common/NoResultsView/index";
-import { Pagination } from "../../../common/Pagination";
+import { useLocation } from "react-router-dom";
+import { fetchPopularPeople, globalSelectors, setSearchQuery } from "../globalSlice";
+import { Container, StyledHeader } from "./styled";
+import PersonTitle from "../../common/PersonTitle";
+import LoadingView from "../../common/LoadingView";
+import ErrorView from "../../common/ErrorView";
 
-export const PeopleList = () => {
+export const PersonList = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
-
-  const searchParams = new URLSearchParams(location.search);
-  const page = Number(searchParams.get("page")) || 1;
-  const query = searchParams.get("query");
-
-  const people = useSelector((state) => state.people.peopleList);
-  const status = useSelector((state) => state.people.status);
-  const totalPages = useSelector(selectTotalPages);
-  const totalResults = useSelector(selectTotalResults);
-
-  const isNoResults = status === "success" && query && totalResults === 0;
+  const query = new URLSearchParams(location.hash.split("?")[1]).get("search");
+  const people = useSelector(globalSelectors.selectPeopleData);
+  const isLoading = useSelector(globalSelectors.selectIsLoading);
+  const isError = useSelector(globalSelectors.selectIsError);
 
   useEffect(() => {
-    if (query) {
-      dispatch(fetchSearchPeople({ query, page }));
+    if (!query) {
+      dispatch(fetchPopularPeople());
     } else {
-      dispatch(fetchPopularPeople(page));
+      dispatch(setSearchQuery(query));
     }
-  }, [dispatch, query, page]);
+  }, [dispatch, query]);
 
-  const onPageChange = (newPage) => {
-    if (newPage > 0 && newPage <= totalPages) {
-      navigate(`?page=${newPage}${query ? `&query=${query}` : ""}`);
-    }
-  };
 
-  if (status === "error") {
-    return <Error />;
-  }
+  if (isError) return <ErrorView />;
+  if (isLoading) return <LoadingView query={query} />;
 
   return (
-    <>
+    <Container>
       <StyledHeader>
-        {query
-          ? `Search results for "${query}"${
-              totalResults ? ` (${totalResults})` : ""
-            }`
-          : "Popular people"}
+        {query ? `Search results for "${query}"` : "Popular people"}
       </StyledHeader>
-
-      {status === "loading" && (
-        <SpinnerWrapper>
-          <StyledSpinner />
-        </SpinnerWrapper>
-      )}
-
-      {status === "success" && (
-        <>
-          {isNoResults ? (
-            <NoResults query={query} />
-          ) : (
-            <>
-              <Container>
-                {people.map((person) => (
-                  <PeopleListCard key={person.id} person={person} />
-                ))}
-              </Container>
-
-              <Pagination
-                page={page}
-                totalPages={Math.min(totalPages, 500)}
-                onPageChange={onPageChange}
-              />
-            </>
-          )}
-        </>
-      )}
-    </>
+      {people && people.map((person) => (
+        <PersonTitle
+          key={person.id}
+          name={person.name}
+          poster={person.profile_path
+            ? `https://image.tmdb.org/t/p/w185${person.profile_path}`
+            : null}
+        />
+      ))}
+    </Container>
   );
 };

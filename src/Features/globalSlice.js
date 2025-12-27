@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     searchQuery: "",
     moviesData: [],
+    peopleData: [],
     isLoading: false,
     isError: false,
 };
@@ -16,10 +17,20 @@ const globalSlice = createSlice({
         },
 
         fetchPopularMovies: (state) => {
+            state.isLoading = true;
         },
 
         setMoviesData: (state, { payload }) => {
             state.moviesData = payload;
+            state.isLoading = false;
+        },
+
+        fetchPopularPeople: (state) => {
+            state.isLoading = true;
+        },
+
+        setPeopleData: (state, { payload }) => {
+            state.peopleData = payload;
             state.isLoading = false;
         },
 
@@ -35,6 +46,7 @@ const globalSlice = createSlice({
 
 export const globalSelectors = {
     selectMoviesData: state => state.global.moviesData,
+    selectPeopleData: state => state.global.peopleData,
     selectIsLoading: state => state.global.isLoading,
     selectIsError: state => state.global.isError,
     selectSearchQuery: state => state.global.searchQuery,
@@ -42,9 +54,11 @@ export const globalSelectors = {
 export const {
     setSearchQuery,
     setMoviesData,
+    setPeopleData,
     setLoading,
     setError,
-    fetchPopularMovies
+    fetchPopularMovies,
+    fetchPopularPeople
 } = globalSlice.actions;
 
 export const globalReducer = globalSlice.reducer;

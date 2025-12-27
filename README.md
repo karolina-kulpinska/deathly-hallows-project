@@ -16,11 +16,7 @@ The interface is being updated in real-time. You can track our progress here:
   <img src="public/image/pagination.png" width="32%" alt="Mobile View" />
 </p>
 
-*(Note: Replace the image paths above with your actual file names from the `public` folder to display them correctly.)*
-
----
-
-## 🏗️ Project Progress & Current Status
+## 🏗️ Project Progress & Current Statu
 
 We are currently focusing on building a rock-solid logic engine and a seamless user experience.
 

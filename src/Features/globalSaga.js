@@ -60,10 +60,10 @@ function* fetchSearchHandler(action) {
 
 function* fetchPopularMoviesHandler() {
     try {
+        yield put(setError(false));
         yield put(setLoading(true));
         const page = yield select(globalSelectors.selectPage);
         const data = yield call(getPopularMovies, page);
-        yield put(setError(false));
         const totalPages = data.total_pages > 500 ? 500 : data.total_pages;
 
 

@@ -1,4 +1,16 @@
-import { Wrapper, Image, Name, PosterWrapper, Content, Year } from "./styled";
+import {
+  Wrapper,
+  Image,
+  Name,
+  PosterWrapper,
+  Content,
+  Year,
+  RatingWrapper,
+  StarIcon,
+  StarPath,
+  Rate,
+  Votes
+} from "./styled";
 import MoviePlaceholder from "./Placeholder";
 
 const MovieTitle = ({ id, name, poster, year, rate, votes }) => (
@@ -9,7 +21,13 @@ const MovieTitle = ({ id, name, poster, year, rate, votes }) => (
     <Content>
       <Name>{name}</Name>
       <Year>{year}</Year>
-      {/* Tu wstawimy komponent ocen, jak juz będzie gotowy */}
+      <RatingWrapper>
+        <StarIcon>
+          <StarPath />
+        </StarIcon>
+        <Rate>{rate ? Number(rate).toFixed(1) : "0.0"}</Rate>
+        <Votes>{votes} votes</Votes>
+      </RatingWrapper>
     </Content>
   </Wrapper >
 );

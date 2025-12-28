@@ -12,11 +12,11 @@ The interface is being updated in real-time. You can track our progress here:
 
 <p align="center">
   <img src="public/image/movies.png" width="32%" alt="Movies Desktop View" />
-  <img src="public/image/people.png" width="32%" alt="People Desktop View" />
   <img src="public/image/pagination.png" width="32%" alt="Mobile View" />
+  <img src="public/image/people.png" width="32%" alt="People Desktop View" />
 </p>
 
-## 🏗️ Project Progress & Current Statu
+## 🏗️ Project Progress & Current Status
 
 We are currently focusing on building a rock-solid logic engine and a seamless user experience.
 
@@ -31,16 +31,19 @@ We are currently focusing on building a rock-solid logic engine and a seamless u
 * **Mobile Responsiveness:** Pagination labels automatically hide on small screens, displaying only intuitive SVG icons.
 * **Grid Alignment:** Centered layout using `grid-column: 1 / -1` for a clean look.
 
-### 3. 👥 Movie & People Modules (In Progress)
-* Dynamic lists for Popular Movies and Popular People.
-* Comprehensive Loading and Error states (handling 404s and API downtime).
-* Context-aware search engine that switches logic based on the active tab.
+### 3. 🎬 UI Components & Movie Tiles (Newly Updated)
+* **Responsive Movie Tiles:** Implemented a flexible grid of movie cards with a vertical layout, optimized for both desktop and mobile devices.
+* **Dynamic Rating System:** Integrated a star rating component with precise numerical formatting (`toFixed(1)`) and custom-styled SVG icons.
+* **Global Theming:** Centralized all UI constants (colors like `candlelight`, `silver`, `woodsmoke`) and `box-shadow` styles within a unified `ThemeProvider` for project-wide consistency.
+* **Navigation-Ready:** Movie tiles are wrapped in functional `Link` components, integrated with React Router for future detail-view transitions.
 
 ---
 
 ## 🔜 Next Steps
+- [x] Implementation of the responsive Movie Title component.
+- [x] Global theme configuration and style refactoring.
+- [ ] Development of the Genre Tag system (mapping API genre IDs to names).
 - [ ] Development of detailed Single Movie and Single Person pages.
-- [ ] Final polishing of UI tiles and hover effects.
 - [ ] Performance optimization and accessibility (a11y) audit.
 
 ## 🛠️ Tech Stack

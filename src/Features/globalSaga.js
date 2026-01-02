@@ -15,9 +15,11 @@ import {
     fetchPopularPeople,
     setPeopleData,
     setTotalPages,
-    globalSelectors
+    globalSelectors,
+    fetchGenres,
+    setGenres
 } from "./globalSlice";
-import { getSearchMovies, getPopularMovies, getPopularPeople, getSearchPeople } from "../Api/tmdbApi";
+import { getSearchMovies, getPopularMovies, getPopularPeople, getSearchPeople, getGenres } from "../Api/tmdbApi";
 
 function* fetchSearchHandler(action) {
     const query = action.payload;
@@ -60,6 +62,7 @@ function* fetchSearchHandler(action) {
 
 function* fetchPopularMoviesHandler() {
     try {
+        yield put(fetchGenres());
         yield put(setError(false));
         yield put(setLoading(true));
         const page = yield select(globalSelectors.selectPage);
@@ -76,6 +79,14 @@ function* fetchPopularMoviesHandler() {
     }
 }
 
+function* fetchGenresHandler() {
+    try {
+        const data = yield call(getGenres);
+        yield put(setGenres(data.genres));
+    } catch (error) {
+        console.error("Błąd podczas pobierania gatunków:", error);
+    }
+}
 
 function* searchWatcher() {
     yield debounce(500, setSearchQuery.type, fetchSearchHandler);
@@ -108,6 +119,10 @@ function* popularPeopleWatcher() {
     yield takeLatest(fetchPopularPeople.type, fetchPopularPeopleHandler);
 }
 
+function* genresWatcher() {
+    yield takeLatest(fetchGenres.type, fetchGenresHandler);
+}
+
 
 
 export function* globalSaga() {
@@ -115,5 +130,6 @@ export function* globalSaga() {
         call(searchWatcher),
         call(popularMoviesWatcher),
         call(popularPeopleWatcher),
+        call(genresWatcher),
     ]);
 }

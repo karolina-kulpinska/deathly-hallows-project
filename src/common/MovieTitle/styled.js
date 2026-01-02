@@ -118,3 +118,23 @@ export const Votes = styled.span`
     font-size: 13px;
   }
 `;
+
+export const GenresWrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0;
+`;
+
+export const GenreTag = styled.div`
+    background: ${({ theme }) => theme.color.mystic};
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: ${({ theme }) => theme.color.woodsmoke};
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+`;

@@ -28,12 +28,15 @@ export const MovieList = () => {
 
     useEffect(() => {
         dispatch(fetchGenres());
+    }, [dispatch]);
+
+    useEffect(() => {
         if (!query) {
             dispatch(fetchPopularMovies());
         } else {
             dispatch(setSearchQuery(query));
         }
-    }, [dispatch, query, page]);
+    }, [query, page, dispatch]);
 
     if (isError) return <ErrorView />;
     if (isLoading) return <LoadingView query={query} />;

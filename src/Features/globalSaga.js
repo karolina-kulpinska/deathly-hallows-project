@@ -24,16 +24,8 @@ import { getSearchMovies, getPopularMovies, getPopularPeople, getSearchPeople, g
 function* fetchSearchHandler(action) {
     const query = action.payload;
 
-    if (query === "") {
-        const isPeoplePage = window.location.hash.includes("/people");
+    if (query === "") return;
 
-        if (isPeoplePage) {
-            yield put(fetchPopularPeople());
-        } else {
-            yield put(fetchPopularMovies());
-        }
-        return;
-    }
 
     try {
         yield put(setLoading(true));

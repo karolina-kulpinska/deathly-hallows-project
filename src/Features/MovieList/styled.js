@@ -6,12 +6,11 @@ export const Container = styled.main`
   margin: 0 auto;
   padding: 0 16px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(208px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(324px, 1fr));
   gap: 24px;
-  justify-content: center;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-    grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
+    grid-template-columns: 1fr;
     gap: 16px;
   }
 `;
@@ -22,9 +21,11 @@ export const StyledHeader = styled.h1`
   font-size: 36px;
   margin-top: 56px;
   margin-bottom: 24px;
+  color: ${({ theme }) => theme.color.woodsmoke};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-    font-size: 20px;
+    font-size: 18px;
     margin-top: 24px;
+    margin-bottom: 12px;
   }
 `;

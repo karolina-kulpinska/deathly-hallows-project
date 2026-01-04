@@ -14,14 +14,17 @@ export const Wrapper = styled(Link)`
   box-shadow: ${({ theme }) => theme.boxShadow.tile};
   border-radius: 5px;
   transition: transform 0.3s ease;
+  height: 100%;
 
 &:hover {
     transform: scale(1.02);
   }
 
  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-    padding: 8px;
-    gap: 8px;
+    padding: 16px;
+    gap: 16px;
+    flex-direction: row;
+    align-items: flex-start;
   }
 `;
 
@@ -61,6 +64,12 @@ export const PosterWrapper = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.color.silver};
+  flex-shrink: 0;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    width: 114px; 
+    height: 169px;
+  }
 
   & svg {
     width: 50%;
@@ -75,6 +84,10 @@ export const Content = styled.div`
   flex-direction: column;
   gap: 8px;
   flex-grow: 1;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    margin-left: 0; 
+  }
 `;
 
 export const RatingWrapper = styled.div`
@@ -85,6 +98,8 @@ export const RatingWrapper = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     gap: 8px;
+    margin-top: 8px; 
+    align-self: flex-start;
   }
 `;
 

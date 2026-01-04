@@ -17,14 +17,17 @@ import {
     setTotalPages,
     globalSelectors,
     fetchGenres,
-    setGenres
+    setGenres,
+    setTotalResults
 } from "./globalSlice";
 import { getSearchMovies, getPopularMovies, getPopularPeople, getSearchPeople, getGenres } from "../Api/tmdbApi";
 
 function* fetchSearchHandler(action) {
     const query = action.payload;
-
-    if (query === "") return;
+    if (query === "") {
+        yield put(setTotalResults(0));
+        return;
+    }
 
 
     try {
@@ -38,7 +41,10 @@ function* fetchSearchHandler(action) {
             ? yield call(getSearchPeople, query, page)
             : yield call(getSearchMovies, query, page);
 
+        yield put(setTotalResults(data.total_results));
+
         const totalPages = data.total_pages > 500 ? 500 : data.total_pages;
+
 
         if (isPeoplePage) {
             yield put(setPeopleData(data.results));

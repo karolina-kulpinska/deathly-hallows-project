@@ -11,13 +11,18 @@ import Pagination from "../../common/Pagination";
 export const MovieList = () => {
     const dispatch = useDispatch();
     const location = useLocation();
-    const query = new URLSearchParams(location.hash.split("?")[1]).get("search");
+    const searchParams = new URLSearchParams(location.search || location.hash.split("?")[1]);
+    const query = searchParams.get("search");
 
     const movies = useSelector(globalSelectors.selectMoviesData);
     const isLoading = useSelector(globalSelectors.selectIsLoading);
     const isError = useSelector(globalSelectors.selectIsError);
     const page = useSelector(globalSelectors.selectPage);
     const genres = useSelector(globalSelectors.selectGenres);
+    const totalResults = useSelector(globalSelectors.selectTotalResults);
+
+    console.log("AKTUALNE QUERY:", query);
+    console.log("LICZBA WYNIKÓW Z REDUX:", totalResults);
 
     const getGenreNames = (genreIds) => {
         return genreIds.map(id => {
@@ -25,6 +30,7 @@ export const MovieList = () => {
             return genre ? genre.name : null;
         }).filter(name => name !== null);
     };
+
 
     useEffect(() => {
         dispatch(fetchGenres());
@@ -44,7 +50,10 @@ export const MovieList = () => {
     return (
         <Container>
             <StyledHeader>
-                {query ? `Search results for "${query}"` : "Popular movies"}
+                {!query
+                    ? "Popular movies"
+                    : `Search results for "${query}" (${totalResults})`
+                }
             </StyledHeader>
             {movies && movies.map((movie) => (
                 <MovieTitle

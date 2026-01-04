@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import { setSearchQuery } from "../globalSlice";
 import Logo from "./Logo";
 import {
@@ -17,16 +17,28 @@ import searchIcon from "../Navigation/Search.svg";
 const Navigation = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const history = useHistory();
 
   const searchQuery = useSelector((state) => state.global.searchQuery);
   const isPeoplePage = location.pathname.includes("/people") || location.hash.includes("/people");
 
   const clearSearch = () => {
     dispatch(setSearchQuery(""));
+    history.push(location.pathname);
   };
 
   const onSearchChange = (event) => {
-    dispatch(setSearchQuery(event.target.value));
+    const query = event.target.value;
+    dispatch(setSearchQuery(query));
+
+    const searchParams = new URLSearchParams(location.search || location.hash.split("?")[1]);
+
+    if (query.trim() === "") {
+      searchParams.delete("search");
+    } else {
+      searchParams.set("search", query);
+    }
+    history.replace(`${location.pathname}?${searchParams.toString()}`);
   };
 
   return (
@@ -34,7 +46,7 @@ const Navigation = () => {
       <Content>
         <LogoWrapper as={Link}
           to="/movies"
-          onClick={() => dispatch(setSearchQuery(""))}>
+          onClick={clearSearch}>
           <Logo />
           <span>Movies Browser</span>
         </LogoWrapper>

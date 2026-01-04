@@ -56,7 +56,7 @@ const Navigation = () => {
           <Menu>
             <MenuLink
               exact
-              to="/"
+              to="/movies"
               activeClassName="active"
               onClick={clearSearch}
             >

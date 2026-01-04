@@ -76,7 +76,7 @@ function* fetchGenresHandler() {
         const data = yield call(getGenres);
         yield put(setGenres(data.genres));
     } catch (error) {
-        console.error("Błąd podczas pobierania gatunków:", error);
+        console.error("Error while fetching genres:", error);
     }
 }
 

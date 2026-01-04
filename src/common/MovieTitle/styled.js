@@ -27,7 +27,7 @@ export const Wrapper = styled(Link)`
 
 export const Image = styled.img`
   width: 100%;
- height: 100%;
+  height: 100%;
   object-fit: cover;
 `;
 
@@ -54,10 +54,20 @@ export const Year = styled.div`
 
 export const PosterWrapper = styled.div`
   width: 100%;
-  aspect-ratio: 2 / 3 ;
+  aspect-ratio: 2 / 3;
   border-radius: 5px;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: ${({ theme }) => theme.color.silver};
+
+  & svg {
+    width: 50%;
+    height: auto;
+    max-width: 120px;
+  }
+
 `;
 
 export const Content = styled.div`

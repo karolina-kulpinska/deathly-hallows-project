@@ -10,7 +10,8 @@ import {
   MenuLink,
   SearchInput,
   SearchWrapper,
-  SearchIcon
+  SearchIcon,
+  NavGroup,
 } from "./styled";
 import searchIcon from "../Navigation/Search.svg";
 
@@ -44,31 +45,32 @@ const Navigation = () => {
   return (
     <Wrapper>
       <Content>
-        <LogoWrapper as={Link}
-          to="/movies"
-          onClick={clearSearch}>
-          <Logo />
-          <span>Movies Browser</span>
-        </LogoWrapper>
+        <NavGroup>
+          <LogoWrapper as={Link}
+            to="/movies"
+            onClick={clearSearch}>
+            <Logo />
+            <span>Movies Browser</span>
+          </LogoWrapper>
 
-        <Menu>
-          <MenuLink
-            exact
-            to="/"
-            activeClassName="active"
-            onClick={clearSearch}
-          >
-            MOVIES
-          </MenuLink>
-          <MenuLink
-            to="/people"
-            activeClassName="active"
-            onClick={clearSearch}
-          >
-            PEOPLE
-          </MenuLink>
-        </Menu>
-
+          <Menu>
+            <MenuLink
+              exact
+              to="/"
+              activeClassName="active"
+              onClick={clearSearch}
+            >
+              MOVIES
+            </MenuLink>
+            <MenuLink
+              to="/people"
+              activeClassName="active"
+              onClick={clearSearch}
+            >
+              PEOPLE
+            </MenuLink>
+          </Menu>
+        </NavGroup>
 
         <SearchWrapper>
           <SearchIcon src={searchIcon} alt="" />

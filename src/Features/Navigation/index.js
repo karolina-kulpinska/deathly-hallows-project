@@ -9,24 +9,21 @@ import {
   Menu,
   MenuLink,
   SearchInput,
+  SearchWrapper,
+  SearchIcon
 } from "./styled";
+import searchIcon from "../Navigation/Search.svg";
 
 const Navigation = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const isHomePage = location.pathname === "/";
-
-  const onMoviesClick = () => {
-  if (isHomePage) {
-    dispatch(setSearchQuery(""));
-  }
-};
-
-  const searchQuery = useSelector(
-  (state) => state.global.searchQuery);
-
+  const searchQuery = useSelector((state) => state.global.searchQuery);
   const isPeoplePage = location.pathname.includes("/people") || location.hash.includes("/people");
+
+  const clearSearch = () => {
+    dispatch(setSearchQuery(""));
+  };
 
   const onSearchChange = (event) => {
     dispatch(setSearchQuery(event.target.value));
@@ -35,7 +32,9 @@ const Navigation = () => {
   return (
     <Wrapper>
       <Content>
-        <LogoWrapper as={Link} to ="/">
+        <LogoWrapper as={Link}
+          to="/movies"
+          onClick={() => dispatch(setSearchQuery(""))}>
           <Logo />
           <span>Movies Browser</span>
         </LogoWrapper>
@@ -45,23 +44,28 @@ const Navigation = () => {
             exact
             to="/"
             activeClassName="active"
-            onClick={onMoviesClick}
+            onClick={clearSearch}
           >
             MOVIES
           </MenuLink>
-          <MenuLink 
-            to="/people" 
+          <MenuLink
+            to="/people"
             activeClassName="active"
+            onClick={clearSearch}
           >
             PEOPLE
           </MenuLink>
         </Menu>
 
-        <SearchInput
-          value={searchQuery}
-          placeholder={isPeoplePage ? "Search for people..." : "Search for movies..."}
-          onChange={onSearchChange}
-        />
+
+        <SearchWrapper>
+          <SearchIcon src={searchIcon} alt="" />
+          <SearchInput
+            value={searchQuery || ""}
+            placeholder={isPeoplePage ? "Search for people..." : "Search for movies..."}
+            onChange={onSearchChange}
+          />
+        </SearchWrapper>
       </Content>
     </Wrapper>
   );

@@ -7,11 +7,18 @@ export const Wrapper = styled.header`
 `;
 
 export const Content = styled.div`
-  max-width: 1200px;
+  max-width: 1368px;;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 16px;
+  width: 100%;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
 `;
 
 export const LogoWrapper = styled.div`
@@ -45,9 +52,47 @@ export const MenuLink = styled(NavLink)`
 `;
 
 export const SearchInput = styled.input`
-  margin-left: auto;
-  padding: 10px 16px;
-  border-radius: 999px;
   border: none;
-  width: 260px;
+  width: 100%;
+  font-size: 16px;
+  line-height: 1.5;
+  color: ${({ theme }) => theme.color.waterloo};
+  
+  &:focus {
+    outline: none;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 13px;
+  }
+`;
+
+export const SearchWrapper = styled.div`
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  background: ${({ theme }) => theme.color.white};
+  border: 1px solid ${({ theme }) => theme.color.mystic};
+  border-radius: 33px;
+  padding: 0 24px;
+  width: 432px; 
+  height: 48px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    width: 100%;
+    margin-top: 16px;
+    height: 44px;
+  }
+`;
+
+export const SearchIcon = styled.img`
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
 `;

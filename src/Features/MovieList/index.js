@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from "react-router-dom";
-import { globalSelectors, fetchPopularMovies, setSearchQuery } from '../globalSlice';
+import { globalSelectors, fetchPopularMovies, setSearchQuery, fetchGenres } from '../globalSlice';
 import { Container, StyledHeader } from "./styled";
 import MovieTitle from "../../common/MovieTitle";
 import LoadingView from "../../common/LoadingView";
@@ -17,6 +17,18 @@ export const MovieList = () => {
     const isLoading = useSelector(globalSelectors.selectIsLoading);
     const isError = useSelector(globalSelectors.selectIsError);
     const page = useSelector(globalSelectors.selectPage);
+    const genres = useSelector(globalSelectors.selectGenres);
+
+    const getGenreNames = (genreIds) => {
+        return genreIds.map(id => {
+            const genre = genres.find(g => g.id === id);
+            return genre ? genre.name : null;
+        }).filter(name => name !== null);
+    };
+
+    useEffect(() => {
+        dispatch(fetchGenres());
+    }, [dispatch]);
 
     useEffect(() => {
         if (!query) {
@@ -24,7 +36,7 @@ export const MovieList = () => {
         } else {
             dispatch(setSearchQuery(query));
         }
-    }, [dispatch, query, page]);
+    }, [query, page, dispatch]);
 
     if (isError) return <ErrorView />;
     if (isLoading) return <LoadingView query={query} />;
@@ -46,6 +58,7 @@ export const MovieList = () => {
                     year={movie.release_date ? movie.release_date.split("-")[0] : ""}
                     rate={movie.vote_average}
                     votes={movie.vote_count}
+                    genres={getGenreNames(movie.genre_ids)}
                 />
             ))}
             <Pagination />

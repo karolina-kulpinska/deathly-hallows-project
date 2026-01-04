@@ -33,4 +33,9 @@ export const getSearchPeople = async (query, page) => {
     return response.data;
 };
 
+export const getGenres = async () => {
+    const response = await tmdbApi.get("/genre/movie/list?language=en");
+    return response.data;
+};
+
 export default tmdbApi;

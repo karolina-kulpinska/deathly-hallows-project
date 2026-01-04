@@ -9,11 +9,13 @@ import {
   StarIcon,
   StarPath,
   Rate,
-  Votes
+  Votes,
+  GenresWrapper,
+  GenreTag
 } from "./styled";
 import MoviePlaceholder from "./Placeholder";
 
-const MovieTitle = ({ id, name, poster, year, rate, votes }) => (
+const MovieTitle = ({ id, name, poster, year, rate, votes, genres }) => (
   <Wrapper to={`/movies/${id}`}>
     <PosterWrapper>
       {poster ? <Image src={poster} alt={name} /> : <MoviePlaceholder />}
@@ -21,6 +23,13 @@ const MovieTitle = ({ id, name, poster, year, rate, votes }) => (
     <Content>
       <Name>{name}</Name>
       <Year>{year}</Year>
+      {genres && genres.length > 0 && (
+        <GenresWrapper>
+          {genres.map(genre => (
+            <GenreTag key={genre}>{genre}</GenreTag>
+          ))}
+        </GenresWrapper>
+      )}
       <RatingWrapper>
         <StarIcon>
           <StarPath />

@@ -15,23 +15,17 @@ import {
     fetchPopularPeople,
     setPeopleData,
     setTotalPages,
-    globalSelectors
+    globalSelectors,
+    fetchGenres,
+    setGenres
 } from "./globalSlice";
-import { getSearchMovies, getPopularMovies, getPopularPeople, getSearchPeople } from "../Api/tmdbApi";
+import { getSearchMovies, getPopularMovies, getPopularPeople, getSearchPeople, getGenres } from "../Api/tmdbApi";
 
 function* fetchSearchHandler(action) {
     const query = action.payload;
 
-    if (query === "") {
-        const isPeoplePage = window.location.hash.includes("/people");
+    if (query === "") return;
 
-        if (isPeoplePage) {
-            yield put(fetchPopularPeople());
-        } else {
-            yield put(fetchPopularMovies());
-        }
-        return;
-    }
 
     try {
         yield put(setLoading(true));
@@ -60,6 +54,7 @@ function* fetchSearchHandler(action) {
 
 function* fetchPopularMoviesHandler() {
     try {
+        yield put(fetchGenres());
         yield put(setError(false));
         yield put(setLoading(true));
         const page = yield select(globalSelectors.selectPage);
@@ -76,6 +71,14 @@ function* fetchPopularMoviesHandler() {
     }
 }
 
+function* fetchGenresHandler() {
+    try {
+        const data = yield call(getGenres);
+        yield put(setGenres(data.genres));
+    } catch (error) {
+        console.error("Error while fetching genres:", error);
+    }
+}
 
 function* searchWatcher() {
     yield debounce(500, setSearchQuery.type, fetchSearchHandler);
@@ -108,6 +111,10 @@ function* popularPeopleWatcher() {
     yield takeLatest(fetchPopularPeople.type, fetchPopularPeopleHandler);
 }
 
+function* genresWatcher() {
+    yield takeLatest(fetchGenres.type, fetchGenresHandler);
+}
+
 
 
 export function* globalSaga() {
@@ -115,5 +122,6 @@ export function* globalSaga() {
         call(searchWatcher),
         call(popularMoviesWatcher),
         call(popularPeopleWatcher),
+        call(genresWatcher),
     ]);
 }

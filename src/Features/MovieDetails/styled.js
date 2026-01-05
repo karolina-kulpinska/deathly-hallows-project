@@ -76,11 +76,13 @@ export const HeroTitle = styled.h1`
 export const Overview = styled.p`
   font-size: 20px;
   line-height: 1.6;
-  margin: 0;
+  margin: 24px 0 0 0;
   color: ${({ theme }) => theme.color.black};
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 14px;
+    margin: 16px 0 0 0;
+    grid-column: 1 / span 2;
   }
 `;
 
@@ -142,5 +144,165 @@ export const MovieImage = styled.img`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     width: 114px;
+  }
+`;
+
+export const Subtitle = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 18px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 12px;
+  }
+`;
+
+export const Label = styled.span`
+  color: ${({ theme }) => theme.color.stormGray};
+`;
+
+export const InfoValue = styled.span`
+  color: ${({ theme }) => theme.color.black};
+`;
+
+export const GenresWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 24px 0;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    gap: 8px;
+    margin: 8px 0;
+  }
+`;
+
+export const GenreTag = styled.div`
+  background: ${({ theme }) => theme.color.mystic}; 
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+`;
+export const MovieYear = styled.div`
+  font-size: 22px;
+  line-height: 1.2;
+  color: ${({ theme }) => theme.color.black};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 13px;
+    color: ${({ theme }) => theme.color.waterloo};
+  }
+`;
+
+export const Properties = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+export const Property = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 18px;
+  line-height: 1.2;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 12px;
+  }
+`;
+
+export const PropertyName = styled.span`
+  color: ${({ theme }) => theme.color.stormGray};
+`;
+
+export const PropertyValue = styled.span`
+  color: ${({ theme }) => theme.color.black};
+`;
+
+export const Genres = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    gap: 8px;
+  }
+`;
+
+export const Genre = styled.div`
+  background: ${({ theme }) => theme.color.mystic};
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 1.4;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    padding: 4px 8px;
+    font-size: 10px;
+    line-height: 1.1;
+  }
+`;
+
+export const RatingWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    margin: 12px 0;
+    gap: 8px;
+  }
+`;
+
+export const StarIcon = styled.svg`
+  width: 24px;
+  height: 24px;
+  fill: ${({ theme }) => theme.color.candlelight};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    width: 16px;
+    height: 16px;
+  }
+`;
+
+export const Rate = styled.span`
+  font-weight: 500;
+  font-size: 22px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 13px;
+    font-weight: 600;
+  }
+`;
+
+export const MaxRate = styled.span`
+  font-size: 14px;
+  align-self: flex-end;
+  margin-bottom: 3px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    display: none; 
+  }
+`;
+
+export const Votes = styled.span`
+  font-size: 14px;
+  color: ${({ theme }) => theme.color.black};
+  align-self: flex-end;
+  margin-bottom: 3px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 13px;
+    color: ${({ theme }) => theme.color.waterloo};
   }
 `;

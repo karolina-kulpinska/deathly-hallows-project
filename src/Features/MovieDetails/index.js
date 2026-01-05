@@ -15,7 +15,20 @@ import {
     Tile,
     MovieImage,
     Details,
-    StatusText
+    StatusText,
+    MovieYear,
+    Properties,
+    Property,
+    PropertyName,
+    PropertyValue,
+    Genres,
+    Genre,
+    Description,
+    RatingWrapper,
+    StarIcon,
+    Rate,
+    MaxRate,
+    Votes
 } from "./styled";
 
 function MovieDetails() {
@@ -56,10 +69,36 @@ function MovieDetails() {
                     <Details>
                         <MainTitle>{movie.title}</MainTitle>
                         {movie.release_date && (
-                            <Overview>
-                                {new Date(movie.release_date).getFullYear()}
-                            </Overview>
+                            <MovieYear>{new Date(movie.release_date).getFullYear()}</MovieYear>
                         )}
+                        <Properties>
+                            <Property>
+                                <PropertyName>Production:</PropertyName>
+                                <PropertyValue>
+                                    {movie.production_countries.map(country => country.name).join(", ")}
+                                </PropertyValue>
+                            </Property>
+
+                            <Property>
+                                <PropertyName>Release date:</PropertyName>
+                                <PropertyValue>
+                                    {movie.release_date ? movie.release_date.replaceAll("-", ".") : "n/a"}
+                                </PropertyValue>
+                            </Property>
+                        </Properties>
+                        <Genres>
+                            {movie.genres.map(genre => (
+                                <Genre key={genre.id}>{genre.name}</Genre>
+                            ))}
+                        </Genres>
+                        <RatingWrapper>
+                            <StarIcon viewBox="0 0 24 24">
+                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                            </StarIcon>
+                            <Rate>{movie.vote_average ? movie.vote_average.toFixed(1) : "0"}</Rate>
+                            <MaxRate>/ 10</MaxRate>
+                            <Votes>{movie.vote_count} votes</Votes>
+                        </RatingWrapper>
                         <Overview>{movie.overview}</Overview>
                     </Details>
                 </Tile>

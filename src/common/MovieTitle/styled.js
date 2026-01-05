@@ -15,6 +15,7 @@ export const Wrapper = styled(Link)`
   border-radius: 5px;
   transition: transform 0.3s ease;
   height: 100%;
+  cursor: pointer;
 
 &:hover {
     transform: scale(1.02);

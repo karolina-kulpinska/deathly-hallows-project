@@ -91,6 +91,8 @@ export const globalSelectors = {
     selectTotalPages: state => state.global.totalPages,
     selectGenres: state => state.global.genres,
     selectTotalResults: state => state.global.totalResults,
+    selectMovieDetails: state => state.global.movieDetails,
+    selectMovieCredits: state => state.global.movieCredits,
 };
 export const {
     setSearchQuery,

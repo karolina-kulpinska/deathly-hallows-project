@@ -13,7 +13,6 @@ import {
   Details,
   DetailsBlock,
 } from "./styled";
-import noMovieImage from "../../../images/noMovieImage.svg";
 import starIcon from "../../../images/starIcon.svg";
 import { Genres } from "../genres";
 

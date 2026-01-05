@@ -6,7 +6,7 @@ export const Container = styled.main`
   margin: 0 auto;
   padding: 0 16px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(324px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {

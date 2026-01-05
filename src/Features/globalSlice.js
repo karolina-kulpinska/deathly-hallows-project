@@ -11,6 +11,7 @@ const globalSlice = createSlice({
         isError: false,
         page: 1,
         totalPages: 500,
+        totalResults: 0,
     },
     reducers: {
         setSearchQuery: (state, { payload }) => {
@@ -53,6 +54,9 @@ const globalSlice = createSlice({
         setGenres: (state, { payload }) => {
             state.genres = payload;
         },
+        setTotalResults: (state, { payload }) => {
+            state.totalResults = payload;
+        },
     },
 });
 
@@ -65,6 +69,7 @@ export const globalSelectors = {
     selectPage: state => state.global.page,
     selectTotalPages: state => state.global.totalPages,
     selectGenres: state => state.global.genres,
+    selectTotalResults: state => state.global.totalResults,
 };
 export const {
     setSearchQuery,
@@ -77,7 +82,8 @@ export const {
     setPage,
     setTotalPages,
     fetchGenres,
-    setGenres
+    setGenres,
+    setTotalResults
 } = globalSlice.actions;
 
 export const globalReducer = globalSlice.reducer;

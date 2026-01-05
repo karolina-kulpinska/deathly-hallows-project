@@ -18,9 +18,14 @@ import {
     globalSelectors,
     fetchGenres,
     setGenres,
-    setTotalResults
+    setTotalResults,
+    fetchPersonDetails,
+    setPersonDetails
 } from "./globalSlice";
-import { getSearchMovies, getPopularMovies, getPopularPeople, getSearchPeople, getGenres } from "../Api/tmdbApi";
+import {
+    getSearchMovies, getPopularMovies, getPopularPeople, getSearchPeople, getGenres, getPersonDetails,
+    getPersonCredits
+} from "../Api/tmdbApi";
 
 function* fetchSearchHandler(action) {
     const query = action.payload;
@@ -28,7 +33,6 @@ function* fetchSearchHandler(action) {
         yield put(setTotalResults(0));
         return;
     }
-
 
     try {
         yield put(setLoading(true));
@@ -120,14 +124,31 @@ function* popularPeopleWatcher() {
 function* genresWatcher() {
     yield takeLatest(fetchGenres.type, fetchGenresHandler);
 }
+function* fetchPersonDetailsHandler(action) {
+    try {
+        yield put(setLoading(true));
+        yield put(setError(false));
 
-
-
+        const id = action.payload;
+        const [person, credits] = yield all([
+            call(getPersonDetails, id),
+            call(getPersonCredits, id)
+        ]);
+        yield put(setPersonDetails({ ...person, movie_credits: credits }));
+    } catch (error) {
+        yield put(setError(true));
+        console.error("Error getting person details:", error);
+    }
+}
+function* personDetailsWatcher() {
+    yield takeLatest(fetchPersonDetails.type, fetchPersonDetailsHandler);
+}
 export function* globalSaga() {
     yield all([
         call(searchWatcher),
         call(popularMoviesWatcher),
         call(popularPeopleWatcher),
         call(genresWatcher),
+        call(personDetailsWatcher),
     ]);
 }

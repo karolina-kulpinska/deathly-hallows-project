@@ -13,6 +13,6 @@ export const GlobalStyle = createGlobalStyle`
     body {
         margin: 0 auto;
         font-family: 'Roboto', sans-serif;
-        background-color: ${({ theme }) => theme.color.white};\
+        background-color: ${({ theme }) => theme.color.white};
     }
 `;

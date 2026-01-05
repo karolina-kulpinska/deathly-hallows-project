@@ -1,0 +1,120 @@
+import styled from "styled-components";
+
+export const Content = styled.div`
+  max-width: 1368px;
+  margin: 56px auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    margin: 24px auto;
+    gap: 21px;
+  }
+`;
+
+export const Wrapper = styled.article`
+  width: 100%;
+  background: ${({ theme }) => theme.color.white};
+  padding: 40px;
+  box-shadow: ${({ theme }) => theme.boxShadow.tile};
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  gap: 0 40px;
+  grid-template-areas: 
+    "photo data"
+    "photo biography";
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    padding: 16px;
+    gap: 0 16px;
+    grid-template-areas: 
+      "photo data"
+      "biography biography";
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+  }
+`;
+
+export const Photo = styled.img`
+  grid-area: photo;
+  width: 399px;
+  height: 564px;
+  border-radius: 5px;
+  object-fit: cover;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    width: 116px;
+    height: 163px;
+  }
+`;
+
+export const Data = styled.div`
+  grid-area: data;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    gap: 8px;
+  }
+`;
+
+export const Name = styled.h1`
+  font-weight: 600;
+  font-size: 36px;
+  margin: 0;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 14px;
+    font-weight: 500;
+  }
+`;
+
+export const InfoWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 18px;
+  line-height: 1.2;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 12px;
+    gap: 4px;
+  }
+`;
+
+export const Label = styled.span`
+  color: ${({ theme }) => theme.color.waterloo};
+`;
+
+export const Info = styled.span`
+  color: ${({ theme }) => theme.color.woodsmoke};
+`;
+
+export const Biography = styled.p`
+  grid-area: biography;
+  font-size: 20px;
+  line-height: 1.6;
+  margin: 24px 0 0 0;
+  word-wrap: break-word;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 14px;
+    margin: 16px 0 0 0;
+    line-height: 1.3;
+  }
+`;
+
+export const Subtitle = styled.h2`
+  font-weight: 600;
+  font-size: 36px;
+  margin: 64px 0 32px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 20px;
+    margin: 21px 0 12px;
+  }
+`;

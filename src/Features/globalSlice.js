@@ -12,6 +12,7 @@ const globalSlice = createSlice({
         page: 1,
         totalPages: 500,
         totalResults: 0,
+        personDetails: null,
     },
     reducers: {
         setSearchQuery: (state, { payload }) => {
@@ -57,6 +58,13 @@ const globalSlice = createSlice({
         setTotalResults: (state, { payload }) => {
             state.totalResults = payload;
         },
+        fetchPersonDetails: (state) => {
+            state.isLoading = true;
+        },
+        setPersonDetails: (state, { payload: person }) => {
+            state.personDetails = person;
+            state.isLoading = false;
+        },
     },
 });
 
@@ -83,7 +91,9 @@ export const {
     setTotalPages,
     fetchGenres,
     setGenres,
-    setTotalResults
+    setTotalResults,
+    fetchPersonDetails,
+    setPersonDetails,
 } = globalSlice.actions;
 
 export const globalReducer = globalSlice.reducer;

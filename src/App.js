@@ -3,11 +3,16 @@ import { MovieList } from "./Features/MovieList";
 import { PersonList } from "./Features/PersonList";
 import Navigation from "./Features/Navigation";
 import { PersonDetails } from "./Features/PersonDetails";
+import MovieDetails from "./Features/MovieDetails";
+
 const App = () => (
   <HashRouter>
     <Navigation />
 
     <Switch>
+      <Route path="/movie/:id">
+        <MovieDetails />
+      </Route>
       <Route path="/person/:id">
         <PersonDetails />
       </Route>

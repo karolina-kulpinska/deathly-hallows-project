@@ -47,4 +47,14 @@ export const getPersonCredits = async (id) => {
     const response = await tmdbApi.get(`/person/${id}/movie_credits?language=en-US`);
     return response.data;
 };
+
+export const getMovieDetails = async (id) => {
+    const response = await tmdbApi.get(`/movie/${id}?language=en-US`);
+    return response.data;
+};
+
+export const getMovieCredits = async (id) => {
+    const response = await tmdbApi.get(`/movie/${id}/credits?language=en-US`);
+    return response.data;
+};
 export default tmdbApi;

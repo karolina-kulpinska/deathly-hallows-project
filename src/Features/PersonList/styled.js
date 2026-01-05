@@ -11,6 +11,7 @@ export const Container = styled.main`
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     grid-template-columns: repeat(2, 1fr); 
     gap: 16px;
+    padding: 0 16px;
   }
 `;
 

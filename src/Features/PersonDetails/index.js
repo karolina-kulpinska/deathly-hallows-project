@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchPersonDetails } from "../globalSlice";
+import { fetchPersonDetails, setPersonDetails } from "../globalSlice";
 import {
     Wrapper,
     Photo,
@@ -28,6 +28,7 @@ export const PersonDetails = () => {
     const isError = useSelector(state => state.global.isError);
 
     useEffect(() => {
+        dispatch(setPersonDetails(null));
         dispatch(fetchPersonDetails(id));
     }, [dispatch, id]);
 

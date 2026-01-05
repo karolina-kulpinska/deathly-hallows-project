@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 208px;
+  width: 100%;
   min-height: 339px;
   box-shadow: 0px 4px 12px rgba(186, 199, 213, 0.5);
   border-radius: 5px;
@@ -16,6 +16,10 @@ export const Wrapper = styled.div`
 
   &:hover {
     transform: scale(1.03); 
+  }
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    padding: 8px; 
+    min-height: auto;
   }
 `;
 
@@ -26,14 +30,18 @@ export const Name = styled.h2`
   text-align: center;
   margin: 0;
   color: ${({ theme }) => theme.color.woodsmoke};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 14px; 
+  }
 `;
 
 export const PosterWrapper = styled.div`
   width: 100%;
-  aspect-ratio: 176 / 231;
+  aspect-ratio: 177 / 231;
   border-radius: 5px;
   overflow: hidden;
-  background-color: #c4c4c4;
+  background-color: ${({ theme }) => theme.color.silver};
 
   display: flex;
   align-items: center;

@@ -49,15 +49,19 @@ export const HeroBackdrop = styled.div`
   width: 100%;
   aspect-ratio: 16 / 9;
   background: ${({ $url }) => `url(https://image.tmdb.org/t/p/original${$url})`} center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 40px 56px;
+  margin: 0 auto;
   
   box-shadow: 
     inset 0 0 80px 80px black,
     inset 0 -150px 100px -20px black; 
-    
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 56px 0;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    padding: 0 16px 8px; 
+  }
 `;
 
 export const HeroTitle = styled.h1`
@@ -82,7 +86,6 @@ export const Overview = styled.p`
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 14px;
     margin: 16px 0 0 0;
-    grid-column: 1 / span 2;
   }
 `;
 
@@ -92,23 +95,6 @@ export const StatusText = styled.div`
   text-align: center;
   margin-top: 64px;
   color: ${({ theme }) => theme.color.woodsmoke};
-`;
-
-export const MovieInfo = styled.section`
-  background: ${({ theme }) => theme.color.white};
-  padding: 40px;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 40px;
-  margin-bottom: 64px;
-  box-shadow: 0px 4px 12px rgba(186, 199, 213, 0.5);
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-    padding: 16px;
-    gap: 16px;
-    grid-template-columns: auto 1fr;
-    margin-bottom: 24px;
-  }
 `;
 
 export const Tile = styled.article`
@@ -147,50 +133,6 @@ export const MovieImage = styled.img`
   }
 `;
 
-export const Subtitle = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  font-size: 18px;
-  line-height: 1.2;
-  margin-bottom: 8px;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-    font-size: 12px;
-  }
-`;
-
-export const Label = styled.span`
-  color: ${({ theme }) => theme.color.stormGray};
-`;
-
-export const InfoValue = styled.span`
-  color: ${({ theme }) => theme.color.black};
-`;
-
-export const GenresWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin: 24px 0;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-    gap: 8px;
-    margin: 8px 0;
-  }
-`;
-
-export const GenreTag = styled.div`
-  background: ${({ theme }) => theme.color.mystic}; 
-  padding: 8px 16px;
-  border-radius: 5px;
-  font-size: 14px;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-    padding: 4px 8px;
-    font-size: 10px;
-  }
-`;
 export const MovieYear = styled.div`
   font-size: 22px;
   line-height: 1.2;
@@ -291,7 +233,7 @@ export const MaxRate = styled.span`
   margin-bottom: 3px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-    display: none; 
+    display: none;
   }
 `;
 
@@ -317,5 +259,70 @@ export const PeopleList = styled.div`
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     margin-top: 12px;
+  }
+`;
+
+export const HeroRating = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+  align-items: flex-start;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 8px;
+  }
+`;
+
+export const HeroScore = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const HeroRate = styled.span`
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.3;
+  color: ${({ theme }) => theme.color.white};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 14px;
+    font-weight: 500;
+  }
+`;
+
+export const HeroMaxRate = styled.span`
+  font-size: 16px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.color.white};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 10px;
+  }
+`;
+
+export const HeroVotes = styled.span`
+  font-size: 16px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.color.white};
+  margin: 0;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 10px;
+    color: ${({ theme }) => theme.color.silver};
+    margin-left: 8px;
+  }
+`;
+
+export const HeroStar = styled(StarIcon)`
+  width: 40px;
+  height: 40px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    width: 20px;
+    height: 20px;
   }
 `;

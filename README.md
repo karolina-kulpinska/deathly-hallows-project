@@ -7,13 +7,10 @@ A modern, responsive web application designed to explore **The Movie Database (T
 ---
 
 ## 📸 Interface Preview
-Below are the key views of the application:
 
-| ![Screen 1](./public/image/movie.png) | ![Screen 2](./public/image/movies.png) |
-
-| ![Screen 3](./public/image/people.png) | ![Screen 4](./public/image/person.png) |
-
----
+ <img src="./public/image/movie.png" width="400" /> | <img src="./public/image/movies.png" width="400" /> |
+ 
+ <img src="./public/image/people.png" width="400" /> | <img src="./public/image/person.png" width="400" /> |
 
 ## 🚀 Key Features
 

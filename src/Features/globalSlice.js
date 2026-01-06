@@ -99,6 +99,7 @@ export const globalSelectors = {
     selectTotalResults: state => state.global.totalResults,
     selectMovieDetails: state => state.global.movieDetails,
     selectMovieCredits: state => state.global.movieCredits,
+    selectPersonDetails: state => state.global.personDetails,
 };
 export const {
     setSearchQuery,

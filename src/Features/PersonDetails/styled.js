@@ -118,3 +118,25 @@ export const Subtitle = styled.h2`
     margin: 21px 0 12px;
   }
 `;
+
+export const MovieTitle = styled.h3`
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.3;
+  margin: 0;
+  color: ${({ theme }) => theme.color.woodsmoke};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 16px;
+  }
+`;
+
+export const MovieYear = styled.span`
+  font-size: 16px;
+  color: ${({ theme }) => theme.color.waterloo};
+  margin-top: 8px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 13px;
+  }
+`;

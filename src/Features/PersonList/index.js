@@ -18,6 +18,8 @@ export const PersonList = () => {
   const page = useSelector(globalSelectors.selectPage);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     if (!query) {
       dispatch(fetchPopularPeople());
     } else {

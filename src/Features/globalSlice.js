@@ -52,6 +52,9 @@ const globalSlice = createSlice({
         },
         setPage: (state, { payload }) => {
             state.page = payload;
+            state.isLoading = true;
+            state.peopleData = [];
+            state.moviesData = [];
         },
         setTotalPages: (state, { payload }) => {
             state.totalPages = payload;

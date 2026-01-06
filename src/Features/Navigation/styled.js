@@ -2,8 +2,12 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
 export const Wrapper = styled.header`
-  background-color: #000;
-  padding: 16px 32px;
+  background-color: ${({ theme }) => theme.color.black};
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
 `;
 
 export const Content = styled.div`
@@ -14,10 +18,12 @@ export const Content = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
+  padding: 23px 16px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-   padding: 8px; 
-   gap: 8px;
+   padding: 16px; 
+   gap: 12px;
+   flex-direction: column;
   }
 `;
 
@@ -35,10 +41,10 @@ export const LogoWrapper = styled.div`
     font-size: 13px; 
     gap: 8px;
 
-  svg {
-    width: 17px;
-  }
-}
+    svg {
+      width: 17px;
+    }
+  } 
 `;
 
 export const Menu = styled.nav`

@@ -7,11 +7,11 @@ export const Container = styled.main`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(208px, 1fr));
   gap: 24px;
-  justify-content: center;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-    grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
+    grid-template-columns: repeat(2, 1fr); 
     gap: 16px;
+    padding: 0 16px;
   }
 `;
 

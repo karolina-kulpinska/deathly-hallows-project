@@ -38,9 +38,11 @@ export const PersonList = () => {
         <PersonTitle
           key={person.id}
           name={person.name}
+          id={person.id}
           poster={person.profile_path
             ? `https://image.tmdb.org/t/p/w185${person.profile_path}`
             : null}
+
         />
       ))}
       <Pagination />

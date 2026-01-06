@@ -11,8 +11,10 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        margin: 0 auto;
+        margin: 0;
+        padding: 0;
         font-family: 'Roboto', sans-serif;
-        background-color: ${({ theme }) => theme.color.white};\
+        overflow-x: hidden;
+        background-color: ${({ theme }) => theme.color.white};
     }
 `;

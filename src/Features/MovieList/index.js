@@ -58,6 +58,7 @@ export const MovieList = () => {
             {movies && movies.map((movie) => (
                 <MovieTitle
                     key={movie.id}
+                    id={movie.id}
                     name={movie.title}
                     poster={
                         movie.poster_path

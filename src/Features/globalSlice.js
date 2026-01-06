@@ -12,6 +12,9 @@ const globalSlice = createSlice({
         page: 1,
         totalPages: 500,
         totalResults: 0,
+        personDetails: null,
+        movieDetails: null,
+        movieCredits: null,
     },
     reducers: {
         setSearchQuery: (state, { payload }) => {
@@ -57,6 +60,30 @@ const globalSlice = createSlice({
         setTotalResults: (state, { payload }) => {
             state.totalResults = payload;
         },
+        fetchPersonDetails: (state) => {
+            state.isLoading = true;
+        },
+        setPersonDetails: (state, { payload: person }) => {
+            state.personDetails = person;
+            state.isLoading = false;
+        },
+
+        fetchMovieDetails: (state) => {
+            state.isLoading = true;
+        },
+
+        clearMovieDetails: (state) => {
+            state.movieDetails = null;
+            state.movieCredits = null;
+            state.isLoading = false;
+        },
+        setMovieDetails: (state, { payload }) => {
+            state.movieDetails = payload;
+            state.isLoading = false;
+        },
+        setMovieCredits: (state, { payload }) => {
+            state.movieCredits = payload;
+        },
     },
 });
 
@@ -70,6 +97,8 @@ export const globalSelectors = {
     selectTotalPages: state => state.global.totalPages,
     selectGenres: state => state.global.genres,
     selectTotalResults: state => state.global.totalResults,
+    selectMovieDetails: state => state.global.movieDetails,
+    selectMovieCredits: state => state.global.movieCredits,
 };
 export const {
     setSearchQuery,
@@ -83,7 +112,13 @@ export const {
     setTotalPages,
     fetchGenres,
     setGenres,
-    setTotalResults
+    setTotalResults,
+    fetchPersonDetails,
+    setPersonDetails,
+    fetchMovieDetails,
+    setMovieDetails,
+    setMovieCredits,
+    clearMovieDetails,
 } = globalSlice.actions;
 
 export const globalReducer = globalSlice.reducer;

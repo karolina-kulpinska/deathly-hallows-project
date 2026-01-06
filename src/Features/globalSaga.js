@@ -18,9 +18,24 @@ import {
     globalSelectors,
     fetchGenres,
     setGenres,
-    setTotalResults
+    setTotalResults,
+    fetchPersonDetails,
+    setPersonDetails,
+    fetchMovieDetails,
+    setMovieDetails,
+    setMovieCredits,
 } from "./globalSlice";
-import { getSearchMovies, getPopularMovies, getPopularPeople, getSearchPeople, getGenres } from "../Api/tmdbApi";
+import {
+    getSearchMovies,
+    getPopularMovies,
+    getPopularPeople,
+    getSearchPeople,
+    getGenres,
+    getPersonDetails,
+    getPersonCredits,
+    getMovieDetails,
+    getMovieCredits
+} from "../Api/tmdbApi";
 
 function* fetchSearchHandler(action) {
     const query = action.payload;
@@ -28,7 +43,6 @@ function* fetchSearchHandler(action) {
         yield put(setTotalResults(0));
         return;
     }
-
 
     try {
         yield put(setLoading(true));
@@ -120,8 +134,47 @@ function* popularPeopleWatcher() {
 function* genresWatcher() {
     yield takeLatest(fetchGenres.type, fetchGenresHandler);
 }
+function* fetchPersonDetailsHandler(action) {
+    try {
+        yield put(setLoading(true));
+        yield put(setError(false));
 
+        const id = action.payload;
+        const [person, credits] = yield all([
+            call(getPersonDetails, id),
+            call(getPersonCredits, id)
+        ]);
+        yield put(setPersonDetails({ ...person, movie_credits: credits }));
+    } catch (error) {
+        yield put(setError(true));
+        console.error("Error getting person details:", error);
+    }
+}
+function* personDetailsWatcher() {
+    yield takeLatest(fetchPersonDetails.type, fetchPersonDetailsHandler);
+}
+function* fetchMovieDetailsHandler(action) {
+    try {
+        yield put(setLoading(true));
+        yield put(setError(false));
 
+        const id = action.payload;
+        const [movie, credits] = yield all([
+            call(getMovieDetails, id),
+            call(getMovieCredits, id)
+        ]);
+
+        yield put(setMovieDetails(movie));
+        yield put(setMovieCredits(credits));
+    } catch (error) {
+        yield put(setError(true));
+        console.error("Error getting movie details:", error);
+    }
+}
+
+function* movieDetailsWatcher() {
+    yield takeLatest(fetchMovieDetails.type, fetchMovieDetailsHandler);
+}
 
 export function* globalSaga() {
     yield all([
@@ -129,5 +182,7 @@ export function* globalSaga() {
         call(popularMoviesWatcher),
         call(popularPeopleWatcher),
         call(genresWatcher),
+        call(personDetailsWatcher),
+        call(movieDetailsWatcher),
     ]);
 }

@@ -9,7 +9,7 @@ A modern, responsive web application designed to explore **The Movie Database (T
 ## 📸 Interface Preview
 
 <p align="center">
-  <img src="./public/image/demo.png" width="800" alt="App Interface Preview" />
+  <img src="./public/image/demo.png" alt="App Interface Preview" style="max-width: 100%; height: auto;" />
 </p>
 
 ## 🚀 Key Features

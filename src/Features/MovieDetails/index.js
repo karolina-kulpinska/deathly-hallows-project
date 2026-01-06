@@ -28,7 +28,8 @@ import {
     StarIcon,
     Rate,
     MaxRate,
-    Votes
+    Votes,
+    PeopleList
 } from "./styled";
 
 function MovieDetails() {
@@ -104,20 +105,20 @@ function MovieDetails() {
                 </Tile>
 
                 <SectionTitle>Cast ({cast.length})</SectionTitle>
-                <Container>
+                <PeopleList>
                     {cast.map((person) => (
                         <PersonTitle
                             key={person.credit_id}
                             id={person.id}
                             name={person.name}
-                            description={person.character}
+                            description={person.character} // Przekazujemy postać
                             poster={person.profile_path}
                         />
                     ))}
-                </Container>
+                </PeopleList>
 
                 <SectionTitle>Crew ({crew.length})</SectionTitle>
-                <Container>
+                <PeopleList>
                     {crew.map((person) => (
                         <PersonTitle
                             key={person.credit_id}
@@ -127,7 +128,7 @@ function MovieDetails() {
                             poster={person.profile_path}
                         />
                     ))}
-                </Container>
+                </PeopleList>
             </Page>
         </>
     );

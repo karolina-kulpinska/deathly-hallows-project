@@ -306,3 +306,16 @@ export const Votes = styled.span`
     color: ${({ theme }) => theme.color.waterloo};
   }
 `;
+
+export const PeopleList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 12px;
+  }
+`;

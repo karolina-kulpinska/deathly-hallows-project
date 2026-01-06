@@ -110,6 +110,7 @@ export const Tile = styled.article`
     padding: 16px;
     gap: 16px;
     margin-bottom: 24px;
+    display: block;
   }
 `;
 
@@ -119,7 +120,8 @@ export const Details = styled.div`
   gap: 24px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-    gap: 8px;
+    gap: 12px;
+    display: block;
   }
 `;
 
@@ -130,6 +132,9 @@ export const MovieImage = styled.img`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     width: 114px;
+    float: left;
+    margin-right: 16px;
+    margin-bottom: 8px;
   }
 `;
 
@@ -174,9 +179,11 @@ export const Genres = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+  margin: 8px 0;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     gap: 8px;
+   margin: 10px 0 12px 0;
   }
 `;
 

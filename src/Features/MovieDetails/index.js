@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMovieDetails, globalSelectors, clearMovieDetails } from "../globalSlice";
 import PersonTitle from "../../common/PersonTitle";
 import { Container } from "../MovieList/styled";
+import ErrorView from "../../common/ErrorView";
 import {
     Page,
     MainTitle,
@@ -57,8 +58,7 @@ function MovieDetails() {
     }, [dispatch, id]);
 
     if (loading) return <Page><StatusText>Loading...</StatusText></Page>;
-    if (error) return <Page><StatusText>Error loading movie details!</StatusText></Page>;
-    if (!movie) return null;
+    if (error) return <ErrorView />; if (!movie) return null;
 
     const cast = credits?.cast || [];
     const crew = credits?.crew || [];

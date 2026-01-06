@@ -8,9 +8,9 @@ A modern, responsive web application designed to explore **The Movie Database (T
 
 ## 📸 Interface Preview
 
- <img src="./public/image/movie.png" width="400" /> | <img src="./public/image/person.png" width="400" />  |
+ <img src="./public/image/movie.png" width="400" height="250" style="object-fit: cover;" /> | <img src="./public/image/person.png" idth="400" height="250" style="object-fit: cover;" />  |
  
- <img src="./public/image/people.png" width="400" /> | <img src="./public/image/movies.png" width="400" /> |
+ <img src="./public/image/people.png" idth="400" height="250" style="object-fit: cover;" /> | <img src="./public/image/movies.png" idth="400" height="250" style="object-fit: cover;" /> |
 
 ## 🚀 Key Features
 

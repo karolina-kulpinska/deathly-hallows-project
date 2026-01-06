@@ -20,6 +20,9 @@ const globalSlice = createSlice({
         setSearchQuery: (state, { payload }) => {
             state.searchQuery = payload;
             state.page = 1;
+            state.isLoading = true;
+            state.moviesData = [];
+            state.totalResults = -1
         },
 
         fetchPopularMovies: (state) => {

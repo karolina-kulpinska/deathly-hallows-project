@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMovieDetails, globalSelectors } from "../globalSlice";
+import { fetchMovieDetails, globalSelectors, clearMovieDetails } from "../globalSlice";
 import PersonTitle from "../../common/PersonTitle";
 import { Container } from "../MovieList/styled";
 import {
@@ -45,6 +45,9 @@ function MovieDetails() {
         if (id) {
             dispatch(fetchMovieDetails(id));
         }
+        return () => {
+            dispatch(clearMovieDetails());
+        };
     }, [dispatch, id]);
 
     if (loading) return <Page><StatusText>Loading...</StatusText></Page>;

@@ -71,6 +71,12 @@ const globalSlice = createSlice({
         fetchMovieDetails: (state) => {
             state.isLoading = true;
         },
+
+        clearMovieDetails: (state) => {
+            state.movieDetails = null;
+            state.movieCredits = null;
+            state.isLoading = false;
+        },
         setMovieDetails: (state, { payload }) => {
             state.movieDetails = payload;
             state.isLoading = false;
@@ -111,7 +117,8 @@ export const {
     setPersonDetails,
     fetchMovieDetails,
     setMovieDetails,
-    setMovieCredits
+    setMovieCredits,
+    clearMovieDetails,
 } = globalSlice.actions;
 
 export const globalReducer = globalSlice.reducer;

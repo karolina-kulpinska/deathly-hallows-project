@@ -7,6 +7,7 @@ import MovieTitle from "../../common/MovieTitle";
 import LoadingView from "../../common/LoadingView";
 import ErrorView from "../../common/ErrorView";
 import Pagination from "../../common/Pagination";
+import NoResultsView from "../../common/NoResultsView";
 
 export const MovieList = () => {
     const dispatch = useDispatch();
@@ -46,6 +47,9 @@ export const MovieList = () => {
 
     if (isError) return <ErrorView />;
     if (isLoading) return <LoadingView query={query} />;
+    if (query && totalResults === 0) {
+        return <NoResultsView query={query} />;
+    }
 
     return (
         <Container>

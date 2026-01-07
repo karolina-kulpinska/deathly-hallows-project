@@ -26,6 +26,7 @@ export const PersonDetails = () => {
     const person = useSelector(state => state.global.personDetails);
     const isLoading = useSelector(state => state.global.isLoading);
     const isError = useSelector(state => state.global.isError);
+    const allGenres = useSelector(state => state.global.genres);
 
     useEffect(() => {
         dispatch(setPersonDetails(null));
@@ -35,6 +36,14 @@ export const PersonDetails = () => {
     if (isError) return <ErrorView />;
     if (isLoading) return <LoadingView />;
     if (!person) return null;
+
+    const getGenreNames = (genreIds) => {
+        if (!allGenres || allGenres.length === 0) return [];
+        return genreIds.map(id => {
+            const genre = allGenres.find(g => g.id === id);
+            return genre ? genre.name : null;
+        }).filter(name => name !== null);
+    };
 
 
 
@@ -67,10 +76,10 @@ export const PersonDetails = () => {
                             <MovieTile
                                 key={movie.credit_id}
                                 id={movie.id}
-                                title={movie.title}
+                                name={movie.title}
                                 poster={movie.poster_path ? `https://image.tmdb.org/t/p/w342${movie.poster_path}` : null}
                                 year={movie.release_date}
-                                genres={movie.genre_ids}
+                                genres={getGenreNames(movie.genre_ids)}
                                 rate={movie.vote_average}
                                 votes={movie.vote_count}
                             />
@@ -87,10 +96,10 @@ export const PersonDetails = () => {
                             <MovieTile
                                 key={movie.credit_id}
                                 id={movie.id}
-                                title={movie.title}
+                                name={movie.title}
                                 poster={movie.poster_path ? `https://image.tmdb.org/t/p/w342${movie.poster_path}` : null}
                                 year={movie.release_date}
-                                genres={movie.genre_ids}
+                                genres={getGenreNames(movie.genre_ids)}
                                 rate={movie.vote_average}
                                 votes={movie.vote_count}
                             />

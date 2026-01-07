@@ -7,6 +7,7 @@ import MovieTitle from "../../common/MovieTitle";
 import LoadingView from "../../common/LoadingView";
 import ErrorView from "../../common/ErrorView";
 import Pagination from "../../common/Pagination";
+import NoResultsView from "../../common/NoResultsView";
 
 export const MovieList = () => {
     const dispatch = useDispatch();
@@ -20,11 +21,15 @@ export const MovieList = () => {
     const page = useSelector(globalSelectors.selectPage);
     const genres = useSelector(globalSelectors.selectGenres);
     const totalResults = useSelector(globalSelectors.selectTotalResults);
+    const reduxQuery = useSelector(state => state.global.searchQuery);
 
-    console.log("AKTUALNE QUERY:", query);
-    console.log("LICZBA WYNIKÓW Z REDUX:", totalResults);
+
 
     const getGenreNames = (genreIds) => {
+        if (!genreIds || !genres || genres.length === 0) {
+            return [];
+        }
+
         return genreIds.map(id => {
             const genre = genres.find(g => g.id === id);
             return genre ? genre.name : null;
@@ -47,12 +52,20 @@ export const MovieList = () => {
     if (isError) return <ErrorView />;
     if (isLoading) return <LoadingView query={query} />;
 
+    if (query && query !== reduxQuery) {
+        return <LoadingView query={query} />;
+    }
+
+    if (!isLoading && query && totalResults === 0) {
+        return <NoResultsView query={query} />;
+    }
+
     return (
         <Container>
             <StyledHeader>
                 {!query
                     ? "Popular movies"
-                    : `Search results for "${query}" (${totalResults})`
+                    : `Search results for "${query}" ${totalResults >= 0 ? `(${totalResults})` : ""}`
                 }
             </StyledHeader>
             {movies && movies.map((movie) => (
@@ -71,7 +84,7 @@ export const MovieList = () => {
                     genres={getGenreNames(movie.genre_ids)}
                 />
             ))}
-            <Pagination />
+            {movies && movies.length > 0 && !isLoading && <Pagination />}
         </Container>
     );
 };

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMovieDetails, globalSelectors, clearMovieDetails } from "../globalSlice";
 import PersonTitle from "../../common/PersonTitle";
 import { Container } from "../MovieList/styled";
+import ErrorView from "../../common/ErrorView";
 import {
     Page,
     MainTitle,
@@ -29,7 +30,13 @@ import {
     Rate,
     MaxRate,
     Votes,
-    PeopleList
+    PeopleList,
+    HeroRating,
+    HeroScore,
+    HeroRate,
+    HeroMaxRate,
+    HeroVotes,
+    HeroStar
 } from "./styled";
 
 function MovieDetails() {
@@ -51,8 +58,7 @@ function MovieDetails() {
     }, [dispatch, id]);
 
     if (loading) return <Page><StatusText>Loading...</StatusText></Page>;
-    if (error) return <Page><StatusText>Error loading movie details!</StatusText></Page>;
-    if (!movie) return null;
+    if (error) return <ErrorView />; if (!movie) return null;
 
     const cast = credits?.cast || [];
     const crew = credits?.crew || [];
@@ -63,6 +69,18 @@ function MovieDetails() {
                 <HeroWrapper>
                     <HeroBackdrop $url={movie.backdrop_path}>
                         <HeroTitle>{movie.title}</HeroTitle>
+                        <HeroRating>
+                            <HeroScore>
+                                <HeroStar viewBox="0 0 24 24">
+                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                                </HeroStar>
+                                <HeroRate>
+                                    {movie.vote_average ? movie.vote_average.toFixed(1).replace(".", ",") : "0"}
+                                </HeroRate>
+                                <HeroMaxRate>/ 10</HeroMaxRate>
+                            </HeroScore>
+                            <HeroVotes>{movie.vote_count} votes </HeroVotes>
+                        </HeroRating>
                     </HeroBackdrop>
                 </HeroWrapper>
             )}
@@ -114,7 +132,7 @@ function MovieDetails() {
                             key={person.credit_id}
                             id={person.id}
                             name={person.name}
-                            description={person.character} // Przekazujemy postać
+                            description={person.character}
                             poster={person.profile_path}
                         />
                     ))}

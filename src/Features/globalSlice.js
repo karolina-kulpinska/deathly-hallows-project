@@ -20,6 +20,9 @@ const globalSlice = createSlice({
         setSearchQuery: (state, { payload }) => {
             state.searchQuery = payload;
             state.page = 1;
+            state.isLoading = true;
+            state.moviesData = [];
+            state.totalResults = -1
         },
 
         fetchPopularMovies: (state) => {
@@ -49,6 +52,9 @@ const globalSlice = createSlice({
         },
         setPage: (state, { payload }) => {
             state.page = payload;
+            state.isLoading = true;
+            state.peopleData = [];
+            state.moviesData = [];
         },
         setTotalPages: (state, { payload }) => {
             state.totalPages = payload;
@@ -99,6 +105,7 @@ export const globalSelectors = {
     selectTotalResults: state => state.global.totalResults,
     selectMovieDetails: state => state.global.movieDetails,
     selectMovieCredits: state => state.global.movieCredits,
+    selectPersonDetails: state => state.global.personDetails,
 };
 export const {
     setSearchQuery,

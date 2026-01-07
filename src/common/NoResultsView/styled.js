@@ -17,14 +17,14 @@ export const Container = styled.div`
 
 export const Header = styled.h1`
     font-size: 36px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 120%;
     margin: 0;
     color: ${({ theme }) => theme.color.woodsmoke};
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 600;
     }
 `
 

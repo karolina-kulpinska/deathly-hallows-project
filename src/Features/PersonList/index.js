@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { fetchPopularPeople, globalSelectors, setSearchQuery } from "../globalSlice";
-import { Container, StyledHeader } from "./styled";
+import { Container, PeopleGrid, StyledHeader } from "./styled";
 import PersonTitle from "../../common/PersonTitle";
 import LoadingView from "../../common/LoadingView";
 import ErrorView from "../../common/ErrorView";
@@ -36,6 +36,8 @@ export const PersonList = () => {
       <StyledHeader>
         {query ? `Search results for "${query}"` : "Popular people"}
       </StyledHeader>
+
+      <PeopleGrid>
       {people && people.map((person) => (
         <PersonTitle
           key={person.id}
@@ -47,6 +49,8 @@ export const PersonList = () => {
 
         />
       ))}
+      </PeopleGrid>
+      
       <Pagination />
     </Container>
   );

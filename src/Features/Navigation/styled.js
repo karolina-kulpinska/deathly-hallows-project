@@ -29,7 +29,7 @@ export const Content = styled.div`
 
 export const LogoWrapper = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 12px;
   color: white;
   font-weight: 500;

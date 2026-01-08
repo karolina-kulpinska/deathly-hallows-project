@@ -11,14 +11,14 @@ export const Wrapper = styled.header`
 `;
 
 export const Content = styled.div`
-  max-width: 1368px;;
+  max-width: 1368px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
-  padding: 23px 16px;
+  padding: 18px 32px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
    padding: 16px; 
@@ -32,8 +32,9 @@ export const LogoWrapper = styled.div`
   align-items: center;
   gap: 12px;
   color: white;
-  font-weight: bold;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: -1.5px;
   text-decoration: none;
   flex-shrink: 0;
 
@@ -61,7 +62,7 @@ export const MenuLink = styled(NavLink)`
   text-decoration: none;
   padding: 8px 24px;
   border-radius: 24px;
-  text-transform: uppercase;
+  text-transform: uppercase; 
   font-size: 14px;
   border: 1px solid transparent;
   font-weight: 600;

@@ -60,10 +60,11 @@ export const Menu = styled.nav`
 export const MenuLink = styled(NavLink)`
   color: white;
   text-decoration: none;
-  padding: 8px 24px;
-  border-radius: 24px;
+  padding: 12px 18px;
+  border-radius: 28px;
   text-transform: uppercase; 
   font-size: 14px;
+  line-height: 16px;
   border: 1px solid transparent;
   font-weight: 600;
 
@@ -73,7 +74,7 @@ export const MenuLink = styled(NavLink)`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 12px;
-    padding: 8px 12px;
+    padding: 10px 20px;
   }
 `;
 

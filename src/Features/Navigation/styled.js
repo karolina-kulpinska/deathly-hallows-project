@@ -18,7 +18,7 @@ export const Content = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
-  padding: 18px 32px;
+  padding: 16px 32px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
    padding: 16px; 
@@ -29,12 +29,13 @@ export const Content = styled.div`
 
 export const LogoWrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 12px;
   color: white;
   font-weight: 500;
   font-size: 24px;
-  letter-spacing: -1.5px;
+  line-height: 40px;
+  letter-spacing: -0.5px;
   text-decoration: none;
   flex-shrink: 0;
 
@@ -64,7 +65,7 @@ export const MenuLink = styled(NavLink)`
   border-radius: 28px;
   text-transform: uppercase; 
   font-size: 14px;
-  line-height: 16px;
+  line-height: 14px;
   border: 1px solid transparent;
   font-weight: 600;
 
@@ -128,7 +129,7 @@ export const SearchIcon = styled.img`
 export const NavGroup = styled.div`
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 80px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     gap: 8px;

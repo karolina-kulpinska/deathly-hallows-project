@@ -93,7 +93,7 @@ export const Label = styled.span`
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
   font-size: 12px;
 
-  ${({ birth }) => birth && `
+  ${({ $birth }) => $birth && `
       &::before {
         content: "Birth: ";
       }

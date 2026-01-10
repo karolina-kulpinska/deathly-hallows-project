@@ -63,7 +63,7 @@ export const PersonDetails = () => {
                 <Data>
                     <Name>{person.name}</Name>
                     <InfoWrapper>
-                        <Label birth>Date of birth:</Label>
+                        <Label $birth>Date of birth:</Label>
                         <Info>{formatDate(person.birthday)}</Info>
                     </InfoWrapper>
 

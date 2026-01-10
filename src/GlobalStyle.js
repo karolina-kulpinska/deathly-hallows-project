@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
         margin: 0;
         padding: 0;
-        font-family: 'Roboto', sans-serif;
+        font-family: '', sans-serif;
         overflow-x: hidden;
         background-color: ${({ theme }) => theme.color.white};
     }

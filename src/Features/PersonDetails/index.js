@@ -13,6 +13,7 @@ import {
     Label,
     Info,
     Content,
+    BirthSection
 } from "./styled";
 import { Container } from "../MovieList/styled";
 import MovieTile from "../../common/MovieTitle";
@@ -62,15 +63,17 @@ export const PersonDetails = () => {
                 />
                 <Data>
                     <Name>{person.name}</Name>
-                    <InfoWrapper>
-                        <Label $birth>Date of birth:</Label>
-                        <Info>{formatDate(person.birthday)}</Info>
-                    </InfoWrapper>
+                    <BirthSection>
+                        <InfoWrapper>
+                            <Label $birth>Date of birth:</Label>
+                            <Info>{formatDate(person.birthday)}</Info>
+                        </InfoWrapper>
 
-                    <InfoWrapper>
-                        <Label>Place of birth:</Label>
-                        <Info>{person.place_of_birth || "Unknown"}</Info>
-                    </InfoWrapper>
+                        <InfoWrapper>
+                            <Label>Place of birth:</Label>
+                            <Info>{person.place_of_birth || "Unknown"}</Info>
+                        </InfoWrapper>
+                    </BirthSection>
                 </Data>
                 <Biography>{person.biography}</Biography>
             </Wrapper>

@@ -1,5 +1,8 @@
 const Logo = () => (
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    viewBox="0 0 40 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg">
     <path
       d="M26.8789 24.9939L32.9872 27.4906C34.1472 27.9639 35.4172 27.1122 35.4172 25.8589V14.7939C35.4172 13.5406 34.1472 12.6872 32.9872 13.1606L26.8789 15.6572"
       stroke="white"

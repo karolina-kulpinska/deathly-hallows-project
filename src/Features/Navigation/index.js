@@ -12,6 +12,7 @@ import {
   SearchWrapper,
   SearchIcon,
   NavGroup,
+  AppTitle
 } from "./styled";
 import searchIcon from "../Navigation/Search.svg";
 
@@ -53,7 +54,7 @@ const Navigation = () => {
             to="/movies"
             onClick={clearSearch}>
             <Logo />
-            <span>Movies Browser</span>
+            <AppTitle>Movies Browser</AppTitle>
           </LogoWrapper>
 
           <Menu>

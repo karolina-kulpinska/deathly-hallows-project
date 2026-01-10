@@ -31,18 +31,20 @@ export const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
   text-decoration: none;
   flex-shrink: 0;
 
+  svg {
+    width: 40px;
+    height: 40px;
+  }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-    font-size: 13px; 
     gap: 8px;
 
     svg {
-      width: 17px;
+    width: 17px;
+    height: 17px;
     }
   } 
 `;
@@ -57,26 +59,33 @@ export const Menu = styled.nav`
 `;
 
 export const MenuLink = styled(NavLink)`
-  color:${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.white};
   text-decoration: none;
-  padding: 8px 24px;
-  border-radius: 24px;
-  text-transform: uppercase;
-  font-size: 14px;
-  border: 1px solid transparent;
   font-weight: 600;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s ease;
+  font-size: 14px;
+  padding: 8px 24px;
+  height: 48px;
+  border-radius: 24px;
+  border: 1px solid transparent;
 
   ${({ $active }) => $active && `
-    border: 1px solid white;
+    border-color: white;
   `}
 
   &.active {
-    border: 1px solid white;
+    border-color: white;
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 12px;
     padding: 8px 12px;
+    height: 34px;
+    border-radius: 29px;
   }
 `;
 
@@ -136,5 +145,27 @@ export const NavGroup = styled.div`
     gap: 8px;
     width: 100%; 
     justify-content: space-between; 
+  }
+`;
+
+export const AppTitle = styled.h1`
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  width: 168px;
+  height: 40px;
+  font-size: 24px;
+  line-height: 40px;
+  letter-spacing: -1.5px;
+  color: ${({ theme }) => theme.color.white};
+  display: flex;
+  align-items: center;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    width: 95px;
+    height: 17px;
+    font-size: 13px;
+    line-height: 130%;
+    letter-spacing: -0.5px;
   }
 `;

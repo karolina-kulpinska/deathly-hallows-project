@@ -57,8 +57,15 @@ function MovieDetails() {
         };
     }, [dispatch, id]);
 
+    const formatDate = (dateString) => {
+        if (!dateString) return "n/a";
+        const [year, month, day] = dateString.split("-");
+        return `${day}.${month}.${year}`;
+    };
+
     if (loading) return <Page><StatusText>Loading...</StatusText></Page>;
-    if (error) return <ErrorView />; if (!movie) return null;
+    if (error) return <ErrorView />;
+    if (!movie) return null;
 
     const cast = credits?.cast || [];
     const crew = credits?.crew || [];
@@ -104,7 +111,7 @@ function MovieDetails() {
                             <Property>
                                 <PropertyName>Release date:</PropertyName>
                                 <PropertyValue>
-                                    {movie.release_date ? movie.release_date.replaceAll("-", ".") : "n/a"}
+                                    {formatDate(movie.release_date)}
                                 </PropertyValue>
                             </Property>
                         </Properties>

@@ -87,11 +87,34 @@ export const InfoWrapper = styled.div`
 `;
 
 export const Label = styled.span`
+  font-size: 18px;
   color: ${({ theme }) => theme.color.waterloo};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+  font-size: 12px;
+
+  ${({ birth }) => birth && `
+      &::before {
+        content: "Birth: ";
+      }
+      font-size: 0;
+      
+      &::before {
+        font-size: 12px;
+      }
+    `}
+    
+  }
 `;
 
 export const Info = styled.span`
   color: ${({ theme }) => theme.color.woodsmoke};
+  font-size: 18px;
+  line-height: 1.2;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    font-size: 12px;
+  }
 `;
 
 export const Biography = styled.p`

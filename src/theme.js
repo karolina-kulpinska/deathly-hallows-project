@@ -9,6 +9,7 @@ export const theme = {
         waterloo: "#7E839A",
         silver: "#C4C4C4",
         candlelight: "#FCD34D",
+        stormGray: "#74788B",
     },
     breakpoints: {
         mobileMax: 767,

@@ -164,11 +164,16 @@ export const Property = styled.div`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 12px;
+    gap: 8px;
   }
 `;
 
 export const PropertyName = styled.span`
   color: ${({ theme }) => theme.color.stormGray};
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
+    display: none; 
+  }
 `;
 
 export const PropertyValue = styled.span`

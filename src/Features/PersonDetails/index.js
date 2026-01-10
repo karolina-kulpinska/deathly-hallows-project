@@ -37,6 +37,12 @@ export const PersonDetails = () => {
     if (isLoading) return <LoadingView />;
     if (!person) return null;
 
+    const formatDate = (dateString) => {
+        if (!dateString) return "Unknown";
+        const [year, month, day] = dateString.split("-");
+        return `${day}.${month}.${year}`;
+    };
+
     const getGenreNames = (genreIds) => {
         if (!allGenres || allGenres.length === 0) return [];
         return genreIds.map(id => {
@@ -57,9 +63,10 @@ export const PersonDetails = () => {
                 <Data>
                     <Name>{person.name}</Name>
                     <InfoWrapper>
-                        <Label>Date of birth:</Label>
-                        <Info>{person.birthday || "Unknown"}</Info>
+                        <Label birth>Date of birth:</Label>
+                        <Info>{formatDate(person.birthday)}</Info>
                     </InfoWrapper>
+
                     <InfoWrapper>
                         <Label>Place of birth:</Label>
                         <Info>{person.place_of_birth || "Unknown"}</Info>

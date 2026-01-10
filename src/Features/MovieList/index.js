@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from "react-router-dom";
 import { globalSelectors, fetchPopularMovies, setSearchQuery, fetchGenres } from '../globalSlice';
-import { Container, StyledHeader } from "./styled";
+import { Container, MoviesGrid, StyledHeader, } from "./styled";
 import MovieTitle from "../../common/MovieTitle";
 import LoadingView from "../../common/LoadingView";
 import ErrorView from "../../common/ErrorView";
@@ -68,6 +68,8 @@ export const MovieList = () => {
                     : `Search results for "${query}" ${totalResults >= 0 ? `(${totalResults})` : ""}`
                 }
             </StyledHeader>
+
+            <MoviesGrid>
             {movies && movies.map((movie) => (
                 <MovieTitle
                     key={movie.id}
@@ -84,6 +86,7 @@ export const MovieList = () => {
                     genres={getGenreNames(movie.genre_ids)}
                 />
             ))}
+            </MoviesGrid>
             {movies && movies.length > 0 && !isLoading && <Pagination />}
         </Container>
     );

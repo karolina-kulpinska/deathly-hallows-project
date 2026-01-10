@@ -11,14 +11,14 @@ export const Wrapper = styled.header`
 `;
 
 export const Content = styled.div`
-  max-width: 1368px;;
+  max-width: 1368px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
-  padding: 23px 16px;
+  padding: 16px 32px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
    padding: 16px; 
@@ -32,8 +32,10 @@ export const LogoWrapper = styled.div`
   align-items: center;
   gap: 12px;
   color: white;
-  font-weight: bold;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 40px;
+  letter-spacing: -0.5px;
   text-decoration: none;
   flex-shrink: 0;
 
@@ -59,10 +61,11 @@ export const Menu = styled.nav`
 export const MenuLink = styled(NavLink)`
   color: white;
   text-decoration: none;
-  padding: 8px 24px;
-  border-radius: 24px;
-  text-transform: uppercase;
+  padding: 12px 18px;
+  border-radius: 28px;
+  text-transform: uppercase; 
   font-size: 14px;
+  line-height: 14px;
   border: 1px solid transparent;
   font-weight: 600;
 
@@ -72,7 +75,7 @@ export const MenuLink = styled(NavLink)`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 12px;
-    padding: 8px 12px;
+    padding: 10px 20px;
   }
 `;
 
@@ -126,7 +129,7 @@ export const SearchIcon = styled.img`
 export const NavGroup = styled.div`
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 80px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     gap: 8px;

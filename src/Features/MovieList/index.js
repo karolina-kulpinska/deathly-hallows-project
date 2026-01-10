@@ -52,9 +52,7 @@ export const MovieList = () => {
     if (isError) return <ErrorView />;
     if (isLoading) return <LoadingView query={query} />;
 
-    if (query && query !== reduxQuery) {
-        return <LoadingView query={query} />;
-    }
+    if (isLoading) return <LoadingView query={query} />;
 
     if (!isLoading && query && totalResults === 0) {
         return <NoResultsView query={query} />;

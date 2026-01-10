@@ -41,6 +41,12 @@ function* fetchSearchHandler(action) {
     const query = action.payload;
     if (query === "") {
         yield put(setTotalResults(0));
+        const isPeoplePage = window.location.hash.includes("/people");
+        if (isPeoplePage) {
+            yield put(fetchPopularPeople());
+        } else {
+            yield put(fetchPopularMovies());
+        }
         return;
     }
 

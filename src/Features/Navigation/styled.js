@@ -57,24 +57,31 @@ export const Menu = styled.nav`
 `;
 
 export const MenuLink = styled(NavLink)`
-  color: white;
+  color: ${({ theme }) => theme.color.white};
   text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  transition: border 0.2s ease-in-out;
   padding: 8px 24px;
   border-radius: 24px;
-  text-transform: uppercase;
-  font-size: 14px;
   border: 1px solid transparent;
-  font-weight: 600;
 
   &.active {
-    border: 1px solid white;
+    border: 1px solid ${({ theme }) => theme.color.white};
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 12px;
     padding: 8px 12px;
+    border-radius: 29px;
+    height: 34px; 
   }
 `;
+
 
 export const SearchInput = styled.input`
   border: none;

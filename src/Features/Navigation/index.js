@@ -57,14 +57,14 @@ const Navigation = () => {
             <MenuLink
               exact
               to="/movies"
-              activeClassName="active"
+              isActive={() => location.pathname.includes("/movie")}
               onClick={clearSearch}
             >
               MOVIES
             </MenuLink>
             <MenuLink
               to="/people"
-              activeClassName="active"
+              isActive={() => location.pathname.includes("/peopl") || location.pathname.includes("/person")}
               onClick={clearSearch}
             >
               PEOPLE

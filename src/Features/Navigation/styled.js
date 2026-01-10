@@ -59,7 +59,7 @@ export const Menu = styled.nav`
 `;
 
 export const MenuLink = styled(NavLink)`
-  color: white;
+  color: ${({ theme }) => theme.color.white};
   text-decoration: none;
   padding: 12px 18px;
   border-radius: 28px;
@@ -67,10 +67,9 @@ export const MenuLink = styled(NavLink)`
   font-size: 14px;
   line-height: 14px;
   border: 1px solid transparent;
-  font-weight: 600;
 
   &.active {
-    border: 1px solid white;
+    border: 1px solid ${({ theme }) => theme.color.white};
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
@@ -78,6 +77,7 @@ export const MenuLink = styled(NavLink)`
     padding: 10px 20px;
   }
 `;
+
 
 export const SearchInput = styled.input`
   border: none;

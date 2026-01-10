@@ -23,9 +23,12 @@ const Navigation = () => {
   const searchQuery = useSelector((state) => state.global.searchQuery);
   const isPeoplePage = location.pathname.includes("/people") || location.hash.includes("/people");
 
+  const isMovieSection = location.pathname.includes("/movie");
+  const isPeopleSection = location.pathname.includes("/person") || location.pathname.includes("/people");
+
   const clearSearch = () => {
     dispatch(setSearchQuery(""));
-    history.push(location.pathname);
+    history.push("/movies");
   };
 
   const onSearchChange = (event) => {
@@ -55,16 +58,15 @@ const Navigation = () => {
 
           <Menu>
             <MenuLink
-              exact
               to="/movies"
-              activeClassName="active"
+              $active={isMovieSection}
               onClick={clearSearch}
             >
               MOVIES
             </MenuLink>
             <MenuLink
               to="/people"
-              activeClassName="active"
+              $active={isPeopleSection}
               onClick={clearSearch}
             >
               PEOPLE

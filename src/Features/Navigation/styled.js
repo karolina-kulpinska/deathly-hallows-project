@@ -57,7 +57,7 @@ export const Menu = styled.nav`
 `;
 
 export const MenuLink = styled(NavLink)`
-  color: white;
+  color:${({ theme }) => theme.color.white};
   text-decoration: none;
   padding: 8px 24px;
   border-radius: 24px;
@@ -65,6 +65,10 @@ export const MenuLink = styled(NavLink)`
   font-size: 14px;
   border: 1px solid transparent;
   font-weight: 600;
+
+  ${({ $active }) => $active && `
+    border: 1px solid white;
+  `}
 
   &.active {
     border: 1px solid white;

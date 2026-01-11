@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/deathly-hallows-project/static/js/main.dab443cf.js",
+    "main.js": "/deathly-hallows-project/static/js/main.8a993d53.js",
     "static/media/Picture.svg": "/deathly-hallows-project/static/media/Picture.bb3669f179eb88b9faa86c1c340327f8.svg",
     "index.html": "/deathly-hallows-project/index.html",
     "static/media/Danger.svg": "/deathly-hallows-project/static/media/Danger.d32925e0f185f4ecbb902db79545187b.svg",
     "static/media/Search.svg": "/deathly-hallows-project/static/media/Search.ed3f24f20cda9bb4e005406a3f864acb.svg",
     "static/media/spinner.svg": "/deathly-hallows-project/static/media/spinner.43e9b6687d74e78511240203f01ecb87.svg",
-    "main.dab443cf.js.map": "/deathly-hallows-project/static/js/main.dab443cf.js.map"
+    "main.8a993d53.js.map": "/deathly-hallows-project/static/js/main.8a993d53.js.map"
   },
   "entrypoints": [
-    "static/js/main.dab443cf.js"
+    "static/js/main.8a993d53.js"
   ]
 }

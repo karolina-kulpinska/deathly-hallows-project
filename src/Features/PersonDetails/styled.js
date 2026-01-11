@@ -7,6 +7,8 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 64px;
+  background-color: ${({ theme }) => theme.color.mystic}; 
+  min-height: 100vh;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     margin: 24px auto;
@@ -138,12 +140,16 @@ export const Biography = styled.p`
 export const Subtitle = styled.h2`
   font-weight: 600;
   font-size: 36px;
-  margin: 64px 0 32px;
+  line-height: 1.2;
+  color: ${({ theme }) => theme.color.black};
+  width: 100%;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: -40px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 20px;
-    margin: 21px 0 12px;
-  }
+    margin-bottom: -9px;  }
 `;
 
 export const MovieTitle = styled.h3`

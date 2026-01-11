@@ -10,7 +10,6 @@ export const Wrapper = styled(Link)`
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
   box-shadow: ${({ theme }) => theme.boxShadow.tile};
   border-radius: 5px;
   transition: transform 0.3s ease;
@@ -22,7 +21,6 @@ export const Wrapper = styled(Link)`
   }
 
  @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-    padding: 16px;
     gap: 16px;
     flex-direction: row;
     align-items: flex-start;
@@ -44,15 +42,20 @@ export const Name = styled.h2`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 16px;
+    margin: 0;
   }
 `;
 
 export const Year = styled.div`
+  font-weight: 400;
   font-size: 16px;
+  line-height: 1.5;
+  margin-top: 8px;
   color: ${({ theme }) => theme.color.waterloo};
   
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     font-size: 13px;
+    margin: 4px 0 0 0;
   }
 `;
 
@@ -83,12 +86,13 @@ export const PosterWrapper = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
   flex-grow: 1;
+  margin-top: 16px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
-    margin-left: 0; 
-  }
+    gap: 8px;
+    margin-top: 0;
+     }
 `;
 
 export const RatingWrapper = styled.div`
@@ -96,11 +100,11 @@ export const RatingWrapper = styled.div`
   align-items: center;
   gap: 12px;
   margin-top: auto; 
+  padding-top: 12px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.mobileMax}px) {
     gap: 8px;
-    margin-top: 8px; 
-    align-self: flex-start;
+    margin-top: 4px; 
   }
 `;
 
@@ -149,7 +153,7 @@ export const GenresWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin: 8px 0;
+    margin: 8px 0 0 0;
 `;
 
 export const GenreTag = styled.div`

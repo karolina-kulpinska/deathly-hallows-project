@@ -15,6 +15,5 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
         font-family: '', sans-serif;
         overflow-x: hidden;
-        background-color: ${({ theme }) => theme.color.white};
-    }
+        background-color: ${({ theme }) => theme.color.mystic};
 `;

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchPersonDetails, setPersonDetails } from "../globalSlice";
+import { fetchPersonDetails, setPersonDetails, fetchGenres } from "../globalSlice";
 import {
     Wrapper,
     Photo,
@@ -15,7 +15,7 @@ import {
     Content,
     BirthSection
 } from "./styled";
-import { Container } from "../MovieList/styled";
+import { Container, MoviesGrid, StyledHeader, } from "../MovieList/styled";
 import MovieTile from "../../common/MovieTitle";
 import LoadingView from "../../common/LoadingView";
 import ErrorView from "../../common/ErrorView";
@@ -30,6 +30,7 @@ export const PersonDetails = () => {
     const allGenres = useSelector(state => state.global.genres);
 
     useEffect(() => {
+        dispatch(fetchGenres());
         dispatch(setPersonDetails(null));
         dispatch(fetchPersonDetails(id));
     }, [dispatch, id]);
@@ -81,12 +82,13 @@ export const PersonDetails = () => {
             {person.movie_credits?.cast?.length > 0 && (
                 <>
                     <Subtitle>Movies - cast ({person.movie_credits.cast.length})</Subtitle>
-                    <Container as="section">
+                    <MoviesGrid>
                         {person.movie_credits.cast.map((movie) => (
                             <MovieTile
                                 key={movie.credit_id}
                                 id={movie.id}
                                 name={movie.title}
+                                character={movie.character}
                                 poster={movie.poster_path ? `https://image.tmdb.org/t/p/w342${movie.poster_path}` : null}
                                 year={movie.release_date}
                                 genres={getGenreNames(movie.genre_ids)}
@@ -94,19 +96,20 @@ export const PersonDetails = () => {
                                 votes={movie.vote_count}
                             />
                         ))}
-                    </Container>
+                    </MoviesGrid>
                 </>
             )}
 
             {person.movie_credits?.crew?.length > 0 && (
                 <>
                     <Subtitle>Movies - crew ({person.movie_credits.crew.length})</Subtitle>
-                    <Container as="section">
+                    <MoviesGrid>
                         {person.movie_credits.crew.map((movie) => (
                             <MovieTile
                                 key={movie.credit_id}
                                 id={movie.id}
                                 name={movie.title}
+                                character={movie.job}
                                 poster={movie.poster_path ? `https://image.tmdb.org/t/p/w342${movie.poster_path}` : null}
                                 year={movie.release_date}
                                 genres={getGenreNames(movie.genre_ids)}
@@ -114,7 +117,7 @@ export const PersonDetails = () => {
                                 votes={movie.vote_count}
                             />
                         ))}
-                    </Container>
+                    </MoviesGrid>
                 </>
             )}
         </Content>

@@ -15,14 +15,17 @@ import {
 } from "./styled";
 import MoviePlaceholder from "./Placeholder";
 
-const MovieTitle = ({ id, name, poster, year, rate, votes, genres }) => (
+const MovieTitle = ({ id, name, poster, year, rate, votes, genres, character }) => (
   <Wrapper to={`/movie/${id}`}>
     <PosterWrapper>
-      {poster ? <Image src={`https://image.tmdb.org/t/p/w342${poster}`} alt={name} /> : <MoviePlaceholder />}
+      {poster ?
+        <Image src={poster} alt={name} /> : <MoviePlaceholder />}
     </PosterWrapper>
     <Content>
       <Name>{name}</Name>
-      <Year>{year ? new Date(year).getFullYear() : ""}</Year>
+      <Year>
+        {character ? `${character} (${new Date(year).getFullYear()})` : (year ? new Date(year).getFullYear() : "")}
+      </Year>
       {genres && genres.length > 0 && (
         <GenresWrapper>
           {genres.map(genre => (

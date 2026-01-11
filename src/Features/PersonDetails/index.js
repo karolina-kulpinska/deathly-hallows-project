@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchPersonDetails, setPersonDetails } from "../globalSlice";
+import { fetchPersonDetails, setPersonDetails, fetchGenres } from "../globalSlice";
 import {
     Wrapper,
     Photo,
@@ -13,8 +13,9 @@ import {
     Label,
     Info,
     Content,
+    BirthSection
 } from "./styled";
-import { Container } from "../MovieList/styled";
+import { Container, MoviesGrid, StyledHeader, } from "../MovieList/styled";
 import MovieTile from "../../common/MovieTitle";
 import LoadingView from "../../common/LoadingView";
 import ErrorView from "../../common/ErrorView";
@@ -29,6 +30,7 @@ export const PersonDetails = () => {
     const allGenres = useSelector(state => state.global.genres);
 
     useEffect(() => {
+        dispatch(fetchGenres());
         dispatch(setPersonDetails(null));
         dispatch(fetchPersonDetails(id));
     }, [dispatch, id]);
@@ -36,6 +38,12 @@ export const PersonDetails = () => {
     if (isError) return <ErrorView />;
     if (isLoading) return <LoadingView />;
     if (!person) return null;
+
+    const formatDate = (dateString) => {
+        if (!dateString) return "Unknown";
+        const [year, month, day] = dateString.split("-");
+        return `${day}.${month}.${year}`;
+    };
 
     const getGenreNames = (genreIds) => {
         if (!allGenres || allGenres.length === 0) return [];
@@ -56,14 +64,17 @@ export const PersonDetails = () => {
                 />
                 <Data>
                     <Name>{person.name}</Name>
-                    <InfoWrapper>
-                        <Label>Date of birth:</Label>
-                        <Info>{person.birthday || "Unknown"}</Info>
-                    </InfoWrapper>
-                    <InfoWrapper>
-                        <Label>Place of birth:</Label>
-                        <Info>{person.place_of_birth || "Unknown"}</Info>
-                    </InfoWrapper>
+                    <BirthSection>
+                        <InfoWrapper>
+                            <Label $birth>Date of birth:</Label>
+                            <Info>{formatDate(person.birthday)}</Info>
+                        </InfoWrapper>
+
+                        <InfoWrapper>
+                            <Label>Place of birth:</Label>
+                            <Info>{person.place_of_birth || "Unknown"}</Info>
+                        </InfoWrapper>
+                    </BirthSection>
                 </Data>
                 <Biography>{person.biography}</Biography>
             </Wrapper>
@@ -71,12 +82,13 @@ export const PersonDetails = () => {
             {person.movie_credits?.cast?.length > 0 && (
                 <>
                     <Subtitle>Movies - cast ({person.movie_credits.cast.length})</Subtitle>
-                    <Container as="section">
+                    <MoviesGrid>
                         {person.movie_credits.cast.map((movie) => (
                             <MovieTile
                                 key={movie.credit_id}
                                 id={movie.id}
                                 name={movie.title}
+                                character={movie.character}
                                 poster={movie.poster_path ? `https://image.tmdb.org/t/p/w342${movie.poster_path}` : null}
                                 year={movie.release_date}
                                 genres={getGenreNames(movie.genre_ids)}
@@ -84,19 +96,20 @@ export const PersonDetails = () => {
                                 votes={movie.vote_count}
                             />
                         ))}
-                    </Container>
+                    </MoviesGrid>
                 </>
             )}
 
             {person.movie_credits?.crew?.length > 0 && (
                 <>
                     <Subtitle>Movies - crew ({person.movie_credits.crew.length})</Subtitle>
-                    <Container as="section">
+                    <MoviesGrid>
                         {person.movie_credits.crew.map((movie) => (
                             <MovieTile
                                 key={movie.credit_id}
                                 id={movie.id}
                                 name={movie.title}
+                                character={movie.job}
                                 poster={movie.poster_path ? `https://image.tmdb.org/t/p/w342${movie.poster_path}` : null}
                                 year={movie.release_date}
                                 genres={getGenreNames(movie.genre_ids)}
@@ -104,7 +117,7 @@ export const PersonDetails = () => {
                                 votes={movie.vote_count}
                             />
                         ))}
-                    </Container>
+                    </MoviesGrid>
                 </>
             )}
         </Content>
